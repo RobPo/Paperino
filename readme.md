@@ -8,7 +8,6 @@ This is the place to get started with your new hardware! ;-) We have divided the
 * [Reference](refEPD.md): More infos around the ePaper and the accelerometer (data sheets…).
 * [Examples](exampleHelloWorld.md): Ready to use examples for your own inspiration.
 
-![Paperino for Particle Photon](img/HelloWorld.gif)
 
 ## So, what is Paperino?
 
