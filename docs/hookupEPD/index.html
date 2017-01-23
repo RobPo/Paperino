@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        
+        
+        <link rel="shortcut icon" href="../img/favicon.ico">
+        <title>Micro EPD - Paperino Docs</title>
+        <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
+        <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
+        <link href="../css/base.css" rel="stylesheet">
+        <link rel="stylesheet" href="../css/highlight.css">
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+        <![endif]-->
+	
+	<script src="../js/jquery-1.10.2.min.js"></script>
+        <script src="../js/bootstrap-3.0.3.min.js"></script>
+        <script src="../js/highlight.pack.js"></script> 
+    </head>
+
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="..">Paperino Docs</a>
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                    <li >
+                        <a href="..">Home</a>
+                    </li>
+                    <li class="dropdown active">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Hookup guide <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li class="active">
+    <a href="./">Micro EPD</a>
+</li>
+                            
+<li >
+    <a href="../hookupACC/">Accelerometer</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../refEPD/">Micro EPD</a>
+</li>
+                            
+<li >
+    <a href="../refACCEL/">Accelerometer</a>
+</li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            
+<li >
+    <a href="../exampleHelloWorld/">Hello World!</a>
+</li>
+                            
+<li >
+    <a href="../exampleGFXdemo/">GFX demo</a>
+</li>
+                            
+<li >
+    <a href="../exampleComingSoon/">Counter demo (tap-based)</a>
+</li>
+                            
+<li >
+    <a href="../exampleComingSoon/">Stop watch (tap-based)</a>
+</li>
+                            
+<li >
+    <a href="../exampleComingSoon/">Portrait/landscape detection</a>
+</li>
+                            
+<li >
+    <a href="../exampleComingSoon/">WakeOnTap demo</a>
+</li>
+                            
+<li >
+    <a href="../exampleComingSoon/">Thermometer</a>
+</li>
+                        </ul>
+                    </li>
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                        <i class="fa fa-search"></i> Search
+                    </a>
+                </li>
+                    <li >
+                        <a rel="next" href="..">
+                            <i class="fa fa-arrow-left"></i> Previous
+                        </a>
+                    </li>
+                    <li >
+                        <a rel="prev" href="../hookupACC/">
+                            Next <i class="fa fa-arrow-right"></i>
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+        <div class="container">
+                <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="main active"><a href="#the-epaper-hookup-guide">The ePaper hookup guide</a></li>
+            <li><a href="#epaper-display">ePaper display</a></li>
+            <li><a href="#breakout-board">Breakout Board</a></li>
+            <li><a href="#hardware-hookup">Hardware hookup</a></li>
+            <li><a href="#using-the-adafruit-gfx-library">Using the Adafruit GFX Library</a></li>
+            <li><a href="#first-example-hello-world">First Example: Hello World!</a></li>
+    </ul>
+</div></div>
+                <div class="col-md-9" role="main">
+
+<h1 id="the-epaper-hookup-guide">The ePaper hookup guide</h1>
+<p>In this tutorial we’ll give you a brief introduction to the Paperino ePaper display and the breakout board, then we’ll jump into example hardware hookups and code. The tutorial is split into the following sections:</p>
+<p><a href="#Breakout-Board">Breakout Board</a> – To begin, we’ll go over each of the pins on the breakout board and their function. </p>
+<p><a href="#Hardware-hookup">Hardware hookup</a> – In this section we’ll show you how to hook an Arduino up to the display via SPI.</p>
+<p><a href="# Using-the-Adafruit-GFX-Library">Using the Adafruit Library</a> – A quick examination of the Micro ePaper family of function calls.</p>
+<p><a href="#First-Example:-Hello-World!">First Example: Hello World!</a> – The first complete example… let’s make the display blink!</p>
+<p>Beside the ePaper breakout board, you’ll need something to control the display. Optimally you’ll want something that has a 3.3V operating voltage. We’ll be using a Particle Photon as an example, which generates and exposes 3V3 on one of the pins.</p>
+<h2 id="epaper-display">ePaper display</h2>
+<p>The ePaper display from Plastic Logic is an eInk-based EPD with 148x70 pixel resolution. It keeps its image content stable without any power, so its perfect for your connected, ultra-low power project. </p>
+<p><img alt="Screenshot" src="../img/11i_EPD.png" /></p>
+<p>It is super thin and weights just 1.2g!! Actually it’s even bendable, so start thinking of your curved product of the future just now!</p>
+<h2 id="breakout-board">Breakout Board</h2>
+<p>The breakout board is the physical interface between the ePaper display and your MCU. It contains a small circuitry to generate the voltages which are needed to switch an ePaper screen. Furthermore it integrates an accelerometer (BMA250) which allows to add further functionality (like tap detection, portrait/landscape detection, …)</p>
+<p><img alt="Screenshot" src="../img/breakout.png" /></p>
+<p>The breakout board provides access to 12 pins. To start with, you’ll only need the first nine pins to make the display work and two further pin to activate the integrated accelerometer. The following table provides an overview of the used pins:</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Pin</th>
+<th>Function</th>
+<th>Photon (example)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>MOS</td>
+<td>SPI MOSI</td>
+<td>D2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>MIS</td>
+<td>SPI MISO</td>
+<td>D3</td>
+</tr>
+<tr>
+<td>3</td>
+<td>CLK</td>
+<td>SPI clock</td>
+<td>D4</td>
+</tr>
+<tr>
+<td>4</td>
+<td>CS1</td>
+<td>SPI chip select for ePaper driver IC</td>
+<td>D5 or any other free pin</td>
+</tr>
+<tr>
+<td>5</td>
+<td>RST</td>
+<td>Digital pin to reset driver IC UC8156</td>
+<td>A0 or any other free pin</td>
+</tr>
+<tr>
+<td>6</td>
+<td>BSY</td>
+<td>Digital pin to sense activity state of driver IC UC8156</td>
+<td>A1 or any other free pin</td>
+</tr>
+<tr>
+<td>7</td>
+<td>3V3</td>
+<td>Regulated 3.3V power supply</td>
+<td>3V3</td>
+</tr>
+<tr>
+<td>8</td>
+<td>GND</td>
+<td>Ground</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>9</td>
+<td>-</td>
+<td>(unused)</td>
+<td>(unused)</td>
+</tr>
+<tr>
+<td>10</td>
+<td>CS2</td>
+<td>SPI chip select for accelerometer IC</td>
+<td>D0 or any other free pin</td>
+</tr>
+<tr>
+<td>11</td>
+<td>IN2</td>
+<td>Interrupt line #2, e.g. for tap sensing</td>
+<td>A7 or any other free pin</td>
+</tr>
+<tr>
+<td>12</td>
+<td>IN1</td>
+<td>Interrupt line #1, e.g. for wake-up of deep sleeping MCU</td>
+<td>A7</td>
+</tr>
+</tbody>
+</table>
+<p>You can wire-up the two remaining pins called IN1 and IN2 later-on. They are required if you want to wake-up your MCU from deep-sleeping, if for example an motion is detected and/or for sensing finger taps on the screen.</p>
+<h2 id="hardware-hookup">Hardware hookup</h2>
+<p>Now it’s time to wire it up! In this section we’ll go over the hookup, based on an Particle Photon. We’ll be using Particle’s hardware SPI pins in order to achieve the fastest data transfer speed. That means we’ll need to use pins for SPI connection as described in the table above. The other pins – RST, BSY, CS1/CS2 and IN1/IN2 – can be connected to any available digital pin on the Photon.</p>
+<p>Here’s the example hookup:</p>
+<p><img alt="Screenshot" src="../img/pinbelegung.jpg" /></p>
+<h2 id="using-the-adafruit-gfx-library">Using the Adafruit GFX Library</h2>
+<p>Now that we have wired-up the Paperino breakout board with the MCU, it’s time to get started writing your own application! Before you get started, here’s a quick overview of the <code>PL_microEPD</code> library.</p>
+<p>At the top of your code, you’ll need to include the Adafruit GFX library together with its extended fonts support library, which was made by Paul Kourany. Finally, you should add the library <code>PL_microEPD</code> which does the translation to the ePaper displays in the background. </p>
+<pre><code>#include "Adafruit_mfGFX.h"
+#include "fonts.h"
+#include "PL_microEPD.h"
+</code></pre>
+<p>After you have included the library, you can create an object <code>display</code> in the global variable area of your code. Now its also time to define the pin mapping:</p>
+<pre><code>#define EPD_RST     A0      //Reset pin, used to restart the driver IC
+#define EPD_BUSY    A1      //Busy pin, used to sense the activity state of the driver IC
+#define EPD_CS      D5      //Chip select pin, used to select the EPD driver IC
+
+PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);
+</code></pre>
+<p>In the example above we’ve called our <code>PL_MicroEPD</code> object <em>display</em>, but you can call it anything you’d like. You can even create more than one, if you have more displays connected to your MCU.</p>
+<p>The last step to the Paperino setup should occur in the setup() function. Stick a <code>display.begin()</code> function in there, which will initialise the display and update all sorts of behind-the-scenes settings for you.</p>
+<pre><code>setup() {
+    display.begin();        //Configure Paperino and all of it’s pins
+}
+</code></pre>
+<h2 id="first-example-hello-world">First Example: Hello World!</h2>
+<p>Now we are ready to let the display blink! You can use the <code>print()</code> command to write your first text on the screen buffer:</p>
+<pre><code>display.print(“Hello World!”);      //Writes the text “Hello World!” into the image buffer
+display.updateFull();               //Refreshing display with the content of the image buffer
+</code></pre>
+<p>The command <code>updateFull()</code> actually triggers the ePaper refresh, displaying the content of the image buffer. That’s it! To summarize everything, you can now see the complete code here:</p>
+<pre><code>//PAPERINO: Hello World example for the Paperino Micro ePaper breakoutboard
+
+#include "Adafruit_mfGFX.h"
+#include "PLD_tinyEPD.h"
+#include "fonts.h"
+
+#define EPD_RST     A0
+#define EPD_BUSY    A1
+#define EPD_CS      D5
+
+PL_tinyEPD display(EPD_CS, EPD_RST, EPD_BUSY);
+
+void setup() {
+    SPI1.begin();
+    SPI1.setBitOrder(MSBFIRST);                 
+    SPI1.setDataMode(SPI_MODE0); 
+    SPI1.setClockDivider(SPI_CLOCK_DIV4);
+    display.begin(true);
+    display.print(“Hello World!”);
+    display.updateFull();
+}
+
+void loop() {
+    }
+</code></pre>
+<p>That was easy, right? If you want to proceed with the setup of the integrated accelerometer let continue here.
+If you are interested in more powerful design options of the Adafruit class let’s have a look here. </p></div>
+        </div>
+
+        <footer class="col-md-12">
+            <hr>
+            <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</p>
+        </footer>
+        <script>var base_url = '..';</script>
+        <script data-main="../mkdocs/js/search.js" src="../mkdocs/js/require.js"></script>
+        <script src="../js/base.js"></script><div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="Search Modal" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form role="form">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+    </body>
+</html>
