@@ -5,8 +5,8 @@ Welcome to the Paperino docs!
 This is the place to get started with your new hardware! ;-) We have divided the documentation into the following sections:
 
 * [Hookup guide](https://robpo.github.io/Paperino/): Step-by-step instructions to get your Paperino setup and run within minutes.
-* [Reference](refEPD.md): More infos around the ePaper and the accelerometer (data sheets…).
-* [Examples](exampleHelloWorld.md): Ready to use examples for your own inspiration.
+* [Reference](https://robpo.github.io/Paperino/): More infos around the ePaper and the accelerometer (data sheets…).
+* [Examples](https://robpo.github.io/Paperino/): Ready to use examples for your own inspiration.
 
 ![Paperino for Particle Photon](docs/img/screenshot.jpg)
 
