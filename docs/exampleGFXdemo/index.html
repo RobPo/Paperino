@@ -143,6 +143,7 @@
 
 <h1 id="example-gfx-demo">Example: GFX demo!</h1>
 <p>In the previous example, we learned how to initialise the ePaper screen and write “Hello World!”. Let’s try now some more complicated features! In the next section of this tutorial we will learn how to change the size and the position of the text and how to change the text font. In the second section we will see how easy it is to draw some graphic elements on the display. The last section contains the code for a demo, showing an example on how to use these elements.</p>
+<p><img alt="Hello World! demo" src="../img/GFXdemo.gif" /></p>
 <h2 id="characters-and-text">Characters and Text</h2>
 <pre><code>void setCursor(uint16_t x0, uint16_t y0);
 void setTextColor(uint16_t color);
@@ -164,31 +165,109 @@ void drawTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x
 void fillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
 </code></pre>
 <h2 id="code">Code</h2>
-<pre><code>//PAPERINO: Hello World example for the Paperino Micro ePaper breakoutboard
+<pre><code>// PAPERINO: GFX demo. Showing examples of different fonts and text sizes
+// as well as graphic elements like rectangles, circles...
 
-#include "Adafruit_mfGFX.h"
-#include "PL_microEPD.h"
-#include "fonts.h"
+#include &quot;Adafruit_mfGFX.h&quot;
+#include &quot;fonts.h&quot;
+#include &quot;PL_microEPD.h&quot;
 
-#define EPD_CS      D5                  //SPI CS of the ePaper screen
-#define EPD_RST     A0                  //Reset pin
-#define EPD_BUSY    A1                  //Busy pin
+#define EPD_CS      D5
+#define EPD_RST     A0
+#define EPD_BUSY    A1
 
-PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);
+PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY); 
+int i=0;
 
 void setup() {
     SPI1.begin();
     SPI1.setBitOrder(MSBFIRST);                 
     SPI1.setDataMode(SPI_MODE0); 
     SPI1.setClockDivider(SPI_CLOCK_DIV4);
-    display.begin(true);                //Initialize the ePaper and reset the screen
-    display.print(“Hello World!”);      //Write “Hello World!” into the buffer
-    display.updateFull();               //Trigger an update based on the buffer content
+    display.begin(true);                    //Initializing. TRUE=Initial update to refresh the screen to defined state
+    display.print(&quot;Hello World!&quot;);          //Writes content into image buffer
+    display.updateFull();                   //Triggers a full image update, showing content of the imagebuffer
+
+    delay(5000);
+    display.clear();
+    for (int y=0; y &lt; 6; y++) {
+        for (int x=0; x &lt; 26; x++) {
+            i=i+1;
+            display.drawChar(5+x*7,4+y*11,i,0,3,1);
+        }   
+    }
+    display.updateFull();   
+
+    delay(5000);
+    display.clear();
+    display.setCursor(1,1);
+    display.println(&quot;Size1&quot;);
+    display.setTextSize(2);
+    display.println(&quot;Size2&quot;);
+    display.setTextSize(3);
+    display.println(&quot;Size3&quot;);
+    display.setCursor(100,5);
+    display.setTextSize(9);
+    display.println(&quot;9&quot;);
+    display.updateFull();
+
+    delay(5000);
+    display.invertDisplay();
+    display.updateFull();
+
+    delay(5000);
+    display.clear();
+    display.setCursor(1,1);
+    display.setTextSize(1);
+    display.setFont(TIMESNR_8);
+    display.println(&quot;Times New Roman&quot;);
+    display.setFont(CENTURY_8);
+    display.println(&quot;Century Gothic&quot;);
+    display.setFont(ARIAL_8);
+    display.println(&quot;Arial&quot;);
+    display.setFont(COMICS_8);
+    display.println(&quot;Comic&quot;);
+    display.setFont(GLCDFONT);
+    display.println(&quot;GLCDFONT default&quot;);
+    display.setFont(TEST);
+    display.println(&quot;Test&quot;);
+    display.println(&quot;This is a long text with automatic line wrapping.&quot;);
+    display.updateFull();
+
+    delay(5000);
+    display.clear();
+    display.drawRect(5,5,50,50,0);
+    display.fillRect(40,40,25,25,0);
+    display.drawCircle(100,35,30,0);
+    display.drawCircle(100,35,15,0);
+    display.drawCircle(100,35,8,0);
+    display.drawCircle(100,35,4,0);
+    display.updateFull();
+
+    delay(5000);
+    display.clear();
+    display.setTextSize(2);
+    display.setCursor(5,20);
+    display.println(&quot;Hello&quot;);
+    display.setCursor(5,36);
+    display.println(&quot;World!&quot;);
+    display.drawCircle(170,36,40,0);
+    display.drawCircle(170,36,45,0);
+    display.drawCircle(170,36,50,0);
+    display.drawCircle(170,36,55,0);
+    display.drawCircle(170,36,70,0);
+    display.drawCircle(170,36,75,0);
+    display.drawCircle(0,36,135,0);
+    display.drawCircle(0,36,120,0);
+    display.drawCircle(0,36,75,0);
+    display.invertDisplay();
+    display.updateFull();
 }
 
 void loop() {
-    }
+}
 </code></pre>
+
 <p>Now let’s have a look at the code: Before you can talk to your display, the function <code>display.begin(true)</code> needs to be called once in the <code>setup()</code> loop.  This initialises your ePaper screen and resets the display to a solid white background. To write text, the function <code>display.print()</code> can be used. To actually trigger an update, call <code>display.updateFull()</code>. This updates the screen with the content of the previously filled image buffer.</p>
 <p>(video of this example)</p>
 <p>Interested in printing more complicated things on the screen? Then let’s proceed with the next example (<a href="./">GFX demo</a>), which shows you how to draw text in different fonts and sizes and how to draw graphic elements like lines, circles &amp; rectangles.</p></div>
