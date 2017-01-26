@@ -1,27 +1,24 @@
-//*********************************************************************
-//PAPERINO: Hello World example. The shortest possible example code ;-)
-//*********************************************************************
+//PAPERINO: Hello World example for the Paperino Micro ePaper breakoutboard
 
 #include "Adafruit_mfGFX.h"
-#include "fonts.h"
 #include "PL_microEPD.h"
+#include "fonts.h"
 
-#define EPD_RST     A0
-#define EPD_BUSY    A1
-#define EPD_CS      D5
+#define EPD_CS      D5                  //SPI CS of the ePaper screen
+#define EPD_RST     A0                  //Reset pin
+#define EPD_BUSY    A1                  //Busy pin
 
-PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);  
+PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);
 
 void setup() {
-	SPI1.begin();
+    SPI1.begin();
     SPI1.setBitOrder(MSBFIRST);                 
     SPI1.setDataMode(SPI_MODE0); 
     SPI1.setClockDivider(SPI_CLOCK_DIV4);
-    display.begin(true);                    //Initializing. TRUE=Initial update to refresh the screen to defined state
-    display.print("Hello World!");          //Writes content into image buffer
-    display.updateFull();                   //Triggers a full image update, showing content of the imagebuffer
+    display.begin(true);                //Initialize the ePaper and reset the screen
+    display.print(“Hello World!”);      //Write “Hello World!” into the buffer
+    display.updateFull();               //Trigger an update based on the buffer content
 }
 
 void loop() {
 }
-

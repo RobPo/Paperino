@@ -1,20 +1,19 @@
-//***********************************************************************
 // PAPERINO: GFX demo. Showing examples of different fonts and text sizes
 // as well as graphic elements like rectangles, circles...
-//***********************************************************************
+
 #include "Adafruit_mfGFX.h"
 #include "fonts.h"
 #include "PL_microEPD.h"
 
+#define EPD_CS      D5
 #define EPD_RST     A0
 #define EPD_BUSY    A1
-#define EPD_CS      D5
 
 PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY); 
 int i=0;
 
 void setup() {
-	SPI1.begin();
+    SPI1.begin();
     SPI1.setBitOrder(MSBFIRST);                 
     SPI1.setDataMode(SPI_MODE0); 
     SPI1.setClockDivider(SPI_CLOCK_DIV4);
@@ -31,7 +30,7 @@ void setup() {
         }   
     }
     display.updateFull();   
-    
+
     delay(5000);
     display.clear();
     display.setCursor(1,1);
@@ -44,11 +43,11 @@ void setup() {
     display.setTextSize(9);
     display.println("9");
     display.updateFull();
-    
+
     delay(5000);
     display.invertDisplay();
     display.updateFull();
-    
+
     delay(5000);
     display.clear();
     display.setCursor(1,1);
@@ -67,7 +66,7 @@ void setup() {
     display.println("Test");
     display.println("This is a long text with automatic line wrapping.");
     display.updateFull();
-    
+
     delay(5000);
     display.clear();
     display.drawRect(5,5,50,50,0);
@@ -77,7 +76,7 @@ void setup() {
     display.drawCircle(100,35,8,0);
     display.drawCircle(100,35,4,0);
     display.updateFull();
-    
+
     delay(5000);
     display.clear();
     display.setTextSize(2);
@@ -100,4 +99,3 @@ void setup() {
 
 void loop() {
 }
-
