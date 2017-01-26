@@ -87,6 +87,10 @@
 </li>
                             
 <li >
+    <a href="../exampleUpdateMode/">Update Modes</a>
+</li>
+                            
+<li >
     <a href="../exampleComingSoon/">Counter demo (tap-based)</a>
 </li>
                             
@@ -134,18 +138,30 @@
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
         <li class="main active"><a href="#the-accelerometer-hookup-guide">The Accelerometer hookup guide</a></li>
+            <li><a href="#accelerometer-bma250e">Accelerometer BMA250E</a></li>
+            <li><a href="#hardware-hookup">Hardware Hookup</a></li>
             <li><a href="#using-the-accelerometer">Using the Accelerometer</a></li>
-            <li><a href="#hello-world">Hello World!</a></li>
+            <li><a href="#first-example-hello-world">First Example: Hello World!</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
 <h1 id="the-accelerometer-hookup-guide">The Accelerometer hookup guide</h1>
 <p>In this tutorial we’ll give you a brief introduction to the Paperino Accelerometer, then we’ll jump into some example code. The tutorial is split into the following sections:</p>
-<p><a href="./">Accerelometer BMA250E</a> – To begin, we’ll have a look at the used accelerometer. </p>
-<p><a href="./">Hardware Hookup</a> – In this section we’ll show you how to hook an Arduino up to the accelerometer via SPI.</p>
-<p><a href="./">Using the Accelerometer</a> – A quick examination of the family of accelerometer function calls.</p>
+<ul>
+<li><a href="./">Accerelometer BMA250E</a> – To begin, we’ll have a look at the used accelerometer. </li>
+<li><a href="./">Hardware Hookup</a> – In this section we’ll show you how to connect to an Arduino compatible MCU via SPI.</li>
+<li><a href="./">Using the Accelerometer</a> – A quick examination of the family of accelerometer function calls.</li>
+<li><a href="./">First Example: Hello World!</a> – First demo using the accelerometer.</li>
+</ul>
 <p>Beside the ePaper breakout board, you’ll need something to control the display. Optimally you’ll want something that has a 3.3V operating voltage. We’ll be using a Particle Photon as an example, which generates and exposes 3V3 on one of the pins.</p>
+<h2 id="accelerometer-bma250e">Accelerometer BMA250E</h2>
+<p>The BMA250E is a MEMS-based acceleration sensor from BOSCH. It supports measurement of the acceleration in three perpendicular axes. Furthermore it can be used to detect motion/no motion (for power saving) and tap-sensing (for touch simulation).</p>
+<p><img alt="BMA250E" src="../img/BMA250E.png" /></p>
+<h2 id="hardware-hookup">Hardware Hookup</h2>
+<p>Now it’s time to wire it up! In this section we’ll go over the hookup, based on an Particle Photon. We’ll be using Particle’s hardware SPI pins in order to achieve the fastest data transfer speed. That means we’ll need to use pins for SPI connection as described in the table above. The other pins – RST, BSY, CS1/CS2 and IN1/IN2 – can be connected to any available digital pin on the Photon.</p>
+<p>Here’s the example hookup:</p>
+<p><img alt="Screenshot" src="../img/pinbelegung.jpg" /></p>
 <h2 id="using-the-accelerometer">Using the Accelerometer</h2>
 <p>Before you get started, here’s a quick overview of the <code>BO_BMA250</code> library and its initialisation procedure. You will see it is doable!</p>
 <p>At the top of your code, where you include your required libraries, you should add the library <code>BO_BMA250</code> which does the setup and communication to the accelerometer. </p>
@@ -163,37 +179,50 @@ BO_BMA250       accel(ACC_CS);
     accel.begin();      //Configure Accelerometer BOSCH BMA250E 
 }
 </code></pre>
-<h2 id="hello-world">Hello World!</h2>
-<p>Now we are ready to let test the thing! You can use the <code>print()</code> command to write your first text on the screen buffer:</p>
-<pre><code>display.print(“Hello World!”);      //Writes the text “Hello World!” into the image buffer
-display.updateFull();               //Refreshing display with the content of the image buffer
+<h2 id="first-example-hello-world">First Example: Hello World!</h2>
+<p>Now we are ready to let test the thing! You can use the <code>activateTapOnInt1()</code> command to sense for taps as a trigger to start doing something.</p>
+<pre><code>accel.activateTapOnInt1();      //Sets INT1 HIGH as soon as a tap is detected
 </code></pre>
 <p>The command <code>updateFull()</code> actually triggers the ePaper refresh, displaying the content of the image buffer. That’s it! To summarize everything, you can now see the complete code here:</p>
-<pre><code>//PAPERINO: Hello World example
-
-#include "Adafruit_mfGFX.h"
-#include "PLD_tinyEPD.h"
-#include "fonts.h"
+<pre><code>// PAPERINO: Tap detection used here to wake-up the Particle Photon and invert the display screen.
+SYSTEM_MODE(SEMI_AUTOMATIC);
+STARTUP(System.enableFeature(FEATURE_RETAINED_MEMORY));
 
 #define EPD_RST     A0
 #define EPD_BUSY    A1
 #define EPD_CS      D5
-#define ACC_CS      D0
+#define ACC_CS      D6
 
-PLD_tinyEPD display(EPD_CS, ACC_CS, EPD_RST, EPD_BUSY);
+#include &quot;Adafruit_mfGFX.h&quot;
+#include &quot;PL_microEPD.h&quot;
+#include &quot;BO_BMA250E.h&quot;
+#include &quot;fonts.h&quot;
+
+PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);  
+BO_BMA250   accel(ACC_CS);
+retained int i = 0;
 
 void setup() {
     SPI1.begin();
     SPI1.setBitOrder(MSBFIRST);                 
     SPI1.setDataMode(SPI_MODE0); 
     SPI1.setClockDivider(SPI_CLOCK_DIV4);
-    display.begin(true);
-    display.print(“Hello World!”);
+
+    i +=1;
+    display.begin(false);
+    display.setTextSize(2);
+    display.setCursor(1,30);
+    display.print(&quot;Hello World!&quot;);
+    if (i%2) display.invertDisplay();
     display.updateFull();
+
+    accel.begin();
+    accel.activateTapOnInt1();
 }
 
 void loop() {
-    }
+    System.sleep(SLEEP_MODE_DEEP,3600);
+}
 </code></pre></div>
         </div>
 

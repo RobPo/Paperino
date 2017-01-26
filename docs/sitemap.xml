@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-01-20</lastmod>
+     <lastmod>2017-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -13,13 +13,13 @@
         
     <url>
      <loc>/hookupEPD/</loc>
-     <lastmod>2017-01-20</lastmod>
+     <lastmod>2017-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/hookupACC/</loc>
-     <lastmod>2017-01-20</lastmod>
+     <lastmod>2017-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -29,13 +29,13 @@
         
     <url>
      <loc>/refEPD/</loc>
-     <lastmod>2017-01-20</lastmod>
+     <lastmod>2017-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/refACCEL/</loc>
-     <lastmod>2017-01-20</lastmod>
+     <lastmod>2017-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
@@ -45,43 +45,49 @@
         
     <url>
      <loc>/exampleHelloWorld/</loc>
-     <lastmod>2017-01-20</lastmod>
+     <lastmod>2017-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/exampleGFXdemo/</loc>
-     <lastmod>2017-01-20</lastmod>
+     <lastmod>2017-01-26</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+        
+    <url>
+     <loc>/exampleUpdateMode/</loc>
+     <lastmod>2017-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/exampleComingSoon/</loc>
-     <lastmod>2017-01-20</lastmod>
+     <lastmod>2017-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/exampleComingSoon/</loc>
-     <lastmod>2017-01-20</lastmod>
+     <lastmod>2017-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/exampleComingSoon/</loc>
-     <lastmod>2017-01-20</lastmod>
+     <lastmod>2017-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/exampleComingSoon/</loc>
-     <lastmod>2017-01-20</lastmod>
+     <lastmod>2017-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/exampleComingSoon/</loc>
-     <lastmod>2017-01-20</lastmod>
+     <lastmod>2017-01-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
         

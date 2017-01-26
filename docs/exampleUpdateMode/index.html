@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="../img/favicon.ico">
-        <title>GFX demo - Paperino Docs</title>
+        <title>Update Modes - Paperino Docs</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
         <link href="../css/font-awesome-4.5.0.css" rel="stylesheet">
         <link href="../css/base.css" rel="stylesheet">
@@ -82,12 +82,12 @@
     <a href="../exampleHelloWorld/">Hello World!</a>
 </li>
                             
-<li class="active">
-    <a href="./">GFX demo</a>
+<li >
+    <a href="../exampleGFXdemo/">GFX demo</a>
 </li>
                             
-<li >
-    <a href="../exampleUpdateMode/">Update Modes</a>
+<li class="active">
+    <a href="./">Update Modes</a>
 </li>
                             
 <li >
@@ -120,12 +120,12 @@
                     </a>
                 </li>
                     <li >
-                        <a rel="next" href="../exampleHelloWorld/">
+                        <a rel="next" href="../exampleGFXdemo/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../exampleUpdateMode/">
+                        <a rel="prev" href="../exampleComingSoon/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -137,51 +137,35 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#example-gfx-demo">Example: GFX demo!</a></li>
-            <li><a href="#characters-and-text">Characters and Text</a></li>
-            <li><a href="#graphics">Graphics</a></li>
+        <li class="main active"><a href="#example-update-modes">Example: Update Modes!</a></li>
+            <li><a href="#full-updates-default">Full updates (default)</a></li>
+            <li><a href="#partial-updates">Partial updates</a></li>
             <li><a href="#code">Code</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="example-gfx-demo">Example: GFX demo!</h1>
-<p>In the previous example, we learned how to initialise the ePaper screen and write “Hello World!”. Let’s try now some more complicated features! In the next section of this tutorial we will learn how to change the size and the position of the text and how to change the text font. In the second section we will see how easy it is to draw some graphic elements on the display. The last section contains the code for a demo, showing an example on how to use these elements.</p>
-<h2 id="characters-and-text">Characters and Text</h2>
-<pre><code>void setCursor(uint16_t x0, uint16_t y0);
-void setTextColor(uint16_t color);
-void setTextColor(uint16_t color, uint16_t backgroundcolor);
-void setTextSize(uint8_t size);
-void setFont(uint8_t f); 
-void setTextWrap(boolean w);
-</code></pre>
-<h2 id="graphics">Graphics</h2>
-<pre><code>void drawPixel(uint16_t x, uint16_t y, uint16_t color);
-void drawLine(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t color);  
-void drawRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
-void fillRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t color);
-void drawCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color);
-void fillCircle(uint16_t x0, uint16_t y0, uint16_t r, uint16_t color);
-void drawRoundRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t radius, uint16_t color);
-void fillRoundRect(uint16_t x0, uint16_t y0, uint16_t w, uint16_t h, uint16_t radius, uint16_t color);
-void drawTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
-void fillTriangle(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2, uint16_t color);
-</code></pre>
+<h1 id="example-update-modes">Example: Update Modes!</h1>
+<p>In the previous example, we learned how to initialise the ePaper and how to write different content on the screen. Now let’s have a look at <em>two</em> different ways an ePaper display can be updated: A high quality update mode (“Full updates”) and a fast and responsive B&amp;W update mode (“Partial updates”). As usual, the last section contains the code for a demo.</p>
+<h2 id="full-updates-default">Full updates (default)</h2>
+<p>The command <code>display.updateFull()</code> triggers an update where all pixels are updated simultaneously. The underlying waveform is tuned to achieve a maximum number of grey levels and to minimise <em>ghosting</em>, which is the effect of seeing remaining parts of the previous image content. As a side effect, a flickering becomes visible which is typical for all ePaper-based displays. We recommend this setting if you start playing with Paperino as the default update mode.</p>
+<h2 id="partial-updates">Partial updates</h2>
+<p>The command <code>display.updatePartial()</code> triggers an update where only the changing pixels are updated (i.e. the text, but not the white background). The underlying waveform supports only two grey level (black &amp; white) which allows a faster and more responsive update time without the typical flickering. Furthermore, the power consumption is reduced since less pixels are switching effectively. Calling many partial updates sequentially can reduce the quality of the static image areas, that’s why we recommend to trigger <strong>one full update after max. of 10 partial updates</strong>.  This assures that these static pixels are also reset regularly.</p>
 <h2 id="code">Code</h2>
-<p><img alt="Hello World! demo" src="../img/GFXdemo.gif" /></p>
-<pre><code>// PAPERINO: GFX demo. Showing examples of different fonts and text sizes
-// as well as graphic elements like rectangles, circles...
+<p><img alt="Demo of different update modes" src="../img/UpdateModes.gif" /></p>
+<pre><code>//************************************************
+// PAPERINO: Full updates vs. partial update demo
+//************************************************
 
 #include &quot;Adafruit_mfGFX.h&quot;
 #include &quot;fonts.h&quot;
 #include &quot;PL_microEPD.h&quot;
 
-#define EPD_CS      D5
 #define EPD_RST     A0
 #define EPD_BUSY    A1
+#define EPD_CS      D5
 
 PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY); 
-int i=0;
 
 void setup() {
     SPI1.begin();
@@ -189,90 +173,52 @@ void setup() {
     SPI1.setDataMode(SPI_MODE0); 
     SPI1.setClockDivider(SPI_CLOCK_DIV4);
     display.begin(true);                    //Initializing. TRUE=Initial update to refresh the screen to defined state
-    display.print(&quot;Hello World!&quot;);          //Writes content into image buffer
+
+    display.setTextSize(2);
+    display.print(&quot;Update Modes&quot;);          //Writes content into image buffer
     display.updateFull();                   //Triggers a full image update, showing content of the imagebuffer
-
-    delay(5000);
-    display.clear();
-    for (int y=0; y &lt; 6; y++) {
-        for (int x=0; x &lt; 26; x++) {
-            i=i+1;
-            display.drawChar(5+x*7,4+y*11,i,0,3,1);
-        }   
-    }
-    display.updateFull();   
-
-    delay(5000);
-    display.clear();
-    display.setCursor(1,1);
-    display.println(&quot;Size1&quot;);
-    display.setTextSize(2);
-    display.println(&quot;Size2&quot;);
-    display.setTextSize(3);
-    display.println(&quot;Size3&quot;);
-    display.setCursor(100,5);
-    display.setTextSize(9);
-    display.println(&quot;9&quot;);
-    display.updateFull();
-
-    delay(5000);
-    display.invertDisplay();
-    display.updateFull();
-
-    delay(5000);
-    display.clear();
-    display.setCursor(1,1);
+    delay(2000);
     display.setTextSize(1);
-    display.setFont(TIMESNR_8);
-    display.println(&quot;Times New Roman&quot;);
-    display.setFont(CENTURY_8);
-    display.println(&quot;Century Gothic&quot;);
-    display.setFont(ARIAL_8);
-    display.println(&quot;Arial&quot;);
-    display.setFont(COMICS_8);
-    display.println(&quot;Comic&quot;);
-    display.setFont(GLCDFONT);
-    display.println(&quot;GLCDFONT default&quot;);
-    display.setFont(TEST);
-    display.println(&quot;Test&quot;);
-    display.println(&quot;This is a long text with automatic line wrapping.&quot;);
+    display.print(&quot;This is a &quot;);
+    display.setTextColor(3, 0);
+    display.println(&quot;full update.&quot;);
+    display.updateFull();                   //Triggers a full image update, showing content of the imagebuffer
+    delay(2000);
+    display.setTextColor(0, 3);
+    display.println(&quot;All pixels are reset no matter whether they are changing or not.&quot;);
+    display.updateFull();
+    delay(3000);
+    display.println(&quot;Hm, a bit boring, isn't it...?&quot;);
     display.updateFull();
 
     delay(5000);
     display.clear();
-    display.drawRect(5,5,50,50,0);
-    display.fillRect(40,40,25,25,0);
-    display.drawCircle(100,35,30,0);
-    display.drawCircle(100,35,15,0);
-    display.drawCircle(100,35,8,0);
-    display.drawCircle(100,35,4,0);
-    display.updateFull();
-
-    delay(5000);
-    display.clear();
+    display.setCursor(1,4);
+    display.updateFull();                   //Triggers a full image update, showing content of the imagebuffer
     display.setTextSize(2);
-    display.setCursor(5,20);
-    display.println(&quot;Hello&quot;);
-    display.setCursor(5,36);
-    display.println(&quot;World!&quot;);
-    display.drawCircle(170,36,40,0);
-    display.drawCircle(170,36,45,0);
-    display.drawCircle(170,36,50,0);
-    display.drawCircle(170,36,55,0);
-    display.drawCircle(170,36,70,0);
-    display.drawCircle(170,36,75,0);
-    display.drawCircle(0,36,135,0);
-    display.drawCircle(0,36,120,0);
-    display.drawCircle(0,36,75,0);
-    display.invertDisplay();
-    display.updateFull();
+    display.println(&quot;OK!&quot;);                 //Writes content into image buffer
+    display.updatePartial();                //Triggers a full image update, showing content of the imagebuffer
+    delay(2000);
+    display.setTextSize(1);
+    display.print(&quot;Now you can see &quot;);
+    display.setTextColor(3, 0);
+    display.print(&quot;partial updates!&quot;);
+    display.updatePartial();                //Triggers a full image update, showing content of the imagebuffer
+    delay(2000);
+    display.setTextColor(0, 3);
+    display.print(&quot; Only changing  pixels are updated. &quot;);
+    display.updatePartial();
+    delay(2000);
+    display.print(&quot;Thisgenerates less flicker  and results in lower    power consumption. &quot;);
+    display.updatePartial();
+
 }
 
 void loop() {
 }
 </code></pre>
 
-<p>The next example will show you two different ways to update the ePaper screen. Interested? Then let’s proceed <a href="./">here</a>.</p></div>
+<p>Congratulation! You now learned the basics of running an ePaper screen. Interested in more? In the next examples we learn how to use the integrated accelerometer as a cheap touch emulator.</p></div>
         </div>
 
         <footer class="col-md-12">

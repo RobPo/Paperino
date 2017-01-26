@@ -87,6 +87,10 @@
 </li>
                             
 <li >
+    <a href="../exampleUpdateMode/">Update Modes</a>
+</li>
+                            
+<li >
     <a href="../exampleComingSoon/">Counter demo (tap-based)</a>
 </li>
                             
@@ -141,7 +145,6 @@
 
 <h1 id="example-hello-world">Example: Hello World!</h1>
 <p>In this initial tutorial we show you how to initialize the ePaper display and write “Hello World!” on the screen. It is the shortest possible demo, you will see it’s really simple:-)</p>
-<p><img alt="Hello World! demo" src="../img/HelloWorld2.gif" /></p>
 <h2 id="code">Code</h2>
 <pre><code>//PAPERINO: Hello World example for the Paperino Micro ePaper breakoutboard
 
@@ -168,9 +171,9 @@ void setup() {
 void loop() {
     }
 </code></pre>
-<p>Now let’s have a look at the code: Before you can talk to your display, the function <code>display.begin(true)</code> needs to be called once in the <code>setup()</code> loop.  This initialises your ePaper screen and resets the display to a solid white background. To write text, the function <code>display.print()</code> can be used. To actually trigger an update, call <code>display.updateFull()</code>. This updates the screen with the content of the previously filled image buffer.</p>
-<p>(video of this example)</p>
-<p>Interested in printing more complicated things on the screen? Then let’s proceed with the next example (<a href="../exampleGFXdemo/">GFX demo</a>), which shows you how to draw text in different fonts and sizes and how to draw graphic elements like lines, circles &amp; rectangles.</p></div>
+<p>Now let’s have a look at the code: Before you can talk to your display, the function <code>display.begin(true)</code> needs to be called once in the <code>setup()</code> loop.  This initialises your ePaper screen and resets the display to a solid white background. To write text, the function <code>display.print()</code> can be used. To actually trigger an update, call <code>display.updateFull()</code>. This updates the screen with the content of the previously filled image buffer. The running demo then looks like this:</p>
+<p><img alt="Hello World! demo" src="../img/HelloWorld2.gif" /></p>
+<p>Are you interested in printing more complicated things on the screen? Then let’s proceed with the <a href="../exampleGFXdemo/">next example</a>, which shows you how to draw text in different fonts and sizes and how to draw graphic elements like lines, circles &amp; rectangles.</p></div>
         </div>
 
         <footer class="col-md-12">

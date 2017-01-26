@@ -87,6 +87,10 @@
 </li>
                             
 <li >
+    <a href="../exampleUpdateMode/">Update Modes</a>
+</li>
+                            
+<li >
     <a href="../exampleComingSoon/">Counter demo (tap-based)</a>
 </li>
                             
@@ -145,17 +149,18 @@
 
 <h1 id="the-epaper-hookup-guide">The ePaper hookup guide</h1>
 <p>In this tutorial we’ll give you a brief introduction to the Paperino ePaper display and the breakout board, then we’ll jump into example hardware hookups and code. The tutorial is split into the following sections:</p>
-<p><a href="#Breakout-Board">Breakout Board</a> – To begin, we’ll go over each of the pins on the breakout board and their function. </p>
-<p><a href="#Hardware-hookup">Hardware hookup</a> – In this section we’ll show you how to hook an Arduino up to the display via SPI.</p>
-<p><a href="# Using-the-Adafruit-GFX-Library">Using the Adafruit Library</a> – A quick examination of the Micro ePaper family of function calls.</p>
-<p><a href="#First-Example:-Hello-World!">First Example: Hello World!</a> – The first complete example… let’s make the display blink!</p>
+<ul>
+<li><a href="#Breakout-Board">Breakout Board</a> – To begin, we’ll go over each of the pins on the breakout board and their function. </li>
+<li><a href="#Hardware-hookup">Hardware hookup</a> – In this section we’ll show you how to hook an Arduino up to the display via SPI.</li>
+<li><a href="# Using-the-Adafruit-GFX-Library">Using the Adafruit Library</a> – A quick examination of the Micro ePaper family of function calls.</li>
+<li><a href="#First-Example:-Hello-World!">First Example: Hello World!</a> – The first complete example… let’s make the display blink!</li>
+</ul>
 <p>Beside the ePaper breakout board, you’ll need something to control the display. Optimally you’ll want something that has a 3.3V operating voltage. We’ll be using a Particle Photon as an example, which generates and exposes 3V3 on one of the pins.</p>
 <h2 id="epaper-display">ePaper display</h2>
-<p>The ePaper display from Plastic Logic is an eInk-based EPD with 148x70 pixel resolution. It keeps its image content stable without any power, so its perfect for your connected, ultra-low power project. </p>
-<p><img alt="Screenshot" src="../img/11i_EPD.png" /></p>
-<p>It is super thin and weights just 1.2g!! Actually it’s even bendable, so start thinking of your curved product of the future just now!</p>
+<p>The ePaper display from Plastic Logic is an eInk-based EPD with 148x70 pixel resolution. It keeps its image content stable without any power, so its perfect for your next connected, ultra-low power project. The display is super thin (less than half a millimeter) and weights just 1.2g!! Actually it’s even bendable, so start thinking now about your next curved product!? ;-)</p>
+<p><img alt="EPDdimensions" src="../img/11i_EPD.png" /></p>
 <h2 id="breakout-board">Breakout Board</h2>
-<p>The breakout board is the physical interface between the ePaper display and your MCU. It contains a small circuitry to generate the voltages which are needed to switch an ePaper screen. Furthermore it integrates an accelerometer (BMA250) which allows to add further functionality (like tap detection, portrait/landscape detection, …)</p>
+<p>The breakout board is the physical interface between the ePaper display and your MCU. It contains a small circuitry to generate the voltages which are needed to switch an ePaper screen. Furthermore it integrates an accelerometer (BMA250) which allows to add additional functionality (like tap detection, portrait/landscape detection, …)</p>
 <p><img alt="Screenshot" src="../img/breakout.png" /></p>
 <p>The breakout board provides access to 12 pins. To start with, you’ll only need the first nine pins to make the display work and two further pin to activate the integrated accelerometer. The following table provides an overview of the used pins:</p>
 <table>
@@ -249,7 +254,7 @@
 <p><img alt="Screenshot" src="../img/pinbelegung.jpg" /></p>
 <h2 id="using-the-adafruit-gfx-library">Using the Adafruit GFX Library</h2>
 <p>Now that we have wired-up the Paperino breakout board with the MCU, it’s time to get started writing your own application! Before you get started, here’s a quick overview of the <code>PL_microEPD</code> library.</p>
-<p>At the top of your code, you’ll need to include the Adafruit GFX library together with its extended fonts support library, which was made by Paul Kourany. Finally, you should add the library <code>PL_microEPD</code> which does the translation to the ePaper displays in the background. </p>
+<p>At the top of your code, you’ll need to include the Adafruit GFX library together with a library supporting additional fonts (thanks! to Paul Kourany). Finally, you should add the library <code>PL_microEPD</code> which takes care of the communication to the ePaper display in the background. </p>
 <pre><code>#include "Adafruit_mfGFX.h"
 #include "fonts.h"
 #include "PL_microEPD.h"
@@ -268,11 +273,11 @@ PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);
 }
 </code></pre>
 <h2 id="first-example-hello-world">First Example: Hello World!</h2>
-<p>Now we are ready to let the display blink! You can use the <code>print()</code> command to write your first text on the screen buffer:</p>
+<p>Now we are ready to let the display blink! You can use the <code>print()</code> command to write your first text in the screen buffer:</p>
 <pre><code>display.print(“Hello World!”);      //Writes the text “Hello World!” into the image buffer
 display.updateFull();               //Refreshing display with the content of the image buffer
 </code></pre>
-<p>The command <code>updateFull()</code> actually triggers the ePaper refresh, displaying the content of the image buffer. That’s it! To summarize everything, you can now see the complete code here:</p>
+<p>The command <code>updateFull()</code> actually triggers the ePaper refresh, displaying the content of the image buffer finally. That’s it! To summarise everything, you can now see the complete code here:</p>
 <pre><code>//PAPERINO: Hello World example for the Paperino Micro ePaper breakoutboard
 
 #include "Adafruit_mfGFX.h"
@@ -298,8 +303,8 @@ void setup() {
 void loop() {
     }
 </code></pre>
-<p>That was easy, right? If you want to proceed with the setup of the integrated accelerometer let continue here.
-If you are interested in more powerful design options of the Adafruit class let’s have a look here. </p></div>
+<p>That was easy, right? If you want to proceed with the setup of the integrated accelerometer let’s continue with the accelerometer hook-up guide.
+If you are interested in how to write more complex features on the ePaper we suggest starting with the examples section.</p></div>
         </div>
 
         <footer class="col-md-12">
