@@ -1,5 +1,5 @@
-#ifndef PLD_tinyEPD_h
-#define PLD_tinyEPD_h
+#ifndef PL_microEPD_h
+#define PL_microEPD_h
 
 #include "Adafruit_mfGFX.h"
 
@@ -7,6 +7,11 @@
 #define EPD_HEIGHT  (148)
 //#define EPD_WIDTH   (180)
 //#define EPD_HEIGHT  (100)
+
+#define EPD_BLACK	0x00
+#define EPD_DGRAY	0x01
+#define EPD_LGRAY	0x02
+#define EPD_WHITE	0x03
 
 #define EPD_BUFFER_SIZE		EPD_WIDTH * EPD_HEIGHT / 4		// 4 grey levels, 2 bits per pixel
 
@@ -33,10 +38,10 @@
 #define ACC_BW      0x08    //7.81Hz bandwith
 
 
-class PLD_tinyEPD : public Adafruit_GFX {
+class PL_microEPD : public Adafruit_GFX {
     
 public:
-    PLD_tinyEPD(uint8_t _cs, uint8_t _cs2, uint8_t _rst, uint8_t _busy);
+    PL_microEPD(uint8_t _cs, uint8_t _rst, uint8_t _busy);
     void begin(bool erase);
     void clear();
     void drawPixel(int16_t x, int16_t y, uint16_t color);
@@ -49,29 +54,16 @@ public:
  
 
 private:
-    int cs, cs2, rst, busy;
+    int cs, rst, busy;
     int cursorX, cursorY;
     int fontHeight=8, fontWidth=5;
     int nextline=EPD_WIDTH/4;            //Start with landscape mode as default
     void waitForBusyInactive(void);      //Wait loop until BUSY pin is inactive (LOW)
     void writeRegister(char address, char val1, char val2, char val3, char val4);
     void writeBuffer(void);
-    void TrippleWhiteErase(void);
+    void WhiteErase(void);
     void powerOn(void);
     void powerOff(void);
-};
-
-class BO_BMA250 {
-    
-    public:
-        BO_BMA250(uint8_t _cs2);
-        void initializeBMA250(void);
-        void activateTapOnInt1(void);
-        void readAccel(void);
-    
-    private:
-        int x, y, z, temp;
-        int cs2;
 };
 
 #endif
