@@ -1,29 +1,14 @@
-/*********************************************************************
-This is a library for Plasticlogic's Eink-based Electrophoretic 
-Epaper Display (EPD or "ePaper") based on a UC8156 driver.
-
-This displays uses 4 wire SPI to communicate.
-
-Plasticlogic invests time and resources providing this open source code, 
-please support us and open-source hardware by purchasing products from 
-Plasticlogic & Adafruit!
-
-Written by Robert Poser for Plasticlogic, Dresden/Germany.  
-BSD license, check license.txt for more information
-All text above, and the splash screen below must be included in any redistribution
-*********************************************************************/
-#include "PLD_tinyEPD.h"
+#include "PL_microEPD.h"
 
 byte buffer[EPD_BUFFER_SIZE];	//the memory buffer for the 1.1" Plasticlogic EPD
 
-PLD_tinyEPD::PLD_tinyEPD(uint8_t _cs, uint8_t _cs2, uint8_t _rst, uint8_t _busy) : Adafruit_GFX(EPD_WIDTH, EPD_HEIGHT) {
+PL_microEPD::PL_microEPD(uint8_t _cs, uint8_t _rst, uint8_t _busy) : Adafruit_GFX(EPD_WIDTH, EPD_HEIGHT) {
     cs      = _cs;      //UC8156 display controller
-    cs2     = _cs2;     //BMA250 accelerometer
     rst     = _rst;
     busy    = _busy;
 }
 
-void PLD_tinyEPD::begin(bool erase) {
+void PL_microEPD::begin(bool whiteErase) {
     pinMode(cs, OUTPUT);
     pinMode(rst, OUTPUT);
     pinMode(busy, INPUT);
@@ -42,13 +27,14 @@ void PLD_tinyEPD::begin(bool erase) {
     writeRegister(EPD_PROGRAMMTP, 0xF3, -1, -1, -1); 
     writeRegister(EPD_LOADMONOWF, 0x60, -1, -1, -1);		//Mono-WF laden
 	writeRegister(EPD_INTTEMPERATURE, 0x0A, -1, -1, -1);
-	if (erase)
-		TrippleWhiteErase();
+	if (whiteErase) WhiteErase();
+	setTextColor(EPD_BLACK);
+	setRotation(1);
 }
 
 
-void PLD_tinyEPD::drawPixel(int16_t x, int16_t y, uint16_t color) {
-    //if ((x < 0) || (x >= EPD_WIDTH || (y < 0) || (y >= EPD_HEIGHT))) return;  //need to comment this temporarely out to enable 1.1" support
+void PL_microEPD::drawPixel(int16_t x, int16_t y, uint16_t color) {
+    if ((x < 0) || (x >= _width || (y < 0) || (y >= _height))) return;  
     
 	if (color < 4) {
 		uint16_t byteIndex = x/4 + (y) * nextline;
@@ -64,7 +50,7 @@ void PLD_tinyEPD::drawPixel(int16_t x, int16_t y, uint16_t color) {
 	}
 }
 
-void PLD_tinyEPD::setRotation(uint8_t o) {
+void PL_microEPD::setRotation(uint8_t o) {
     clear();
     if (o==1) {
         nextline = EPD_HEIGHT/4;		//landscape mode (default)
@@ -80,7 +66,7 @@ void PLD_tinyEPD::setRotation(uint8_t o) {
 	}
 }
 
-void PLD_tinyEPD::powerOn() {
+void PL_microEPD::powerOn() {
     waitForBusyInactive();
     //writeRegister(EPD_SETRESOLUTION, 0, 239, 0, 159);			//Panel resolution setting: 0, SL_max-1, GL_max-GL, GL_max-1 --> 1.4"
     writeRegister(EPD_SETRESOLUTION, 0, 239, 0, 147);			//Panel resolution setting: 0, SL_max-1, GL_max-GL, GL_max-1 --> 1.1"
@@ -91,40 +77,41 @@ void PLD_tinyEPD::powerOn() {
     delay(100);
 }
 
-void PLD_tinyEPD::clear() {
+void PL_microEPD::clear() {
 	memset(buffer, 0xFF, arraySize(buffer));
     writeBuffer();
+    setCursor(0,0);
 }
 
-void PLD_tinyEPD::powerOff() {
+void PL_microEPD::powerOff() {
     writeRegister(EPD_POWERCONTROL, 0xD0, -1, -1, -1);
     waitForBusyInactive();
     writeRegister(EPD_POWERCONTROL, 0xC0, -1, -1, -1);
 }
 
 
-void PLD_tinyEPD::writeBuffer(){
+void PL_microEPD::writeBuffer(){
     //writeRegister(EPD_PIXELACESSPOS, 0, 159, -1, -1);			//Pixel Access position: X-Start-Address=0; Y-Start-Address=GL-1 --> 1.4"
     writeRegister(EPD_PIXELACESSPOS, 0, 147, -1, -1);			//Pixel Access position: X-Start-Address=0; Y-Start-Address=GL-1 --> 1.1"
     digitalWrite(cs, LOW);
-    SPI.transfer(0x10);
-	SPI.transfer(buffer, NULL, arraySize(buffer), NULL);
+    SPI1.transfer(0x10);
+	SPI1.transfer(buffer, NULL, arraySize(buffer), NULL);
     digitalWrite(cs, HIGH);
     waitForBusyInactive();
 }
 
 
-uint8_t PLD_tinyEPD::readTemperature() {
+uint8_t PL_microEPD::readTemperature() {
 	uint8_t temp;
     digitalWrite(cs, LOW);                                      //Read current temperature value 
-    SPI.transfer(EPD_REGREAD | 0x08);
-	temp = SPI.transfer(0xFF);
+    SPI1.transfer(EPD_REGREAD | 0x08);
+	temp = SPI1.transfer(0xFF);
     digitalWrite(cs, HIGH);
 	waitForBusyInactive();
 	return temp;
 }
 
-void PLD_tinyEPD::updateFull() {
+void PL_microEPD::updateFull() {
     writeBuffer();
     powerOn();
     writeRegister(EPD_DISPLAYENGINE, 0x03, -1, -1, -1);    
@@ -132,7 +119,7 @@ void PLD_tinyEPD::updateFull() {
     powerOff();
 }
 
-void PLD_tinyEPD::updatePartial() {
+void PL_microEPD::updatePartial() {
     writeBuffer();
     powerOn();
     writeRegister(EPD_DISPLAYENGINE, 0x07, -1, -1, -1);    
@@ -140,7 +127,7 @@ void PLD_tinyEPD::updatePartial() {
     powerOff();
 }
 
-void PLD_tinyEPD::FastupdatePartial() {
+void PL_microEPD::FastupdatePartial() {
     writeBuffer();
     powerOn();
     writeRegister(EPD_PROGRAMMTP, 0x02, -1, -1, -1); 
@@ -150,18 +137,18 @@ void PLD_tinyEPD::FastupdatePartial() {
     powerOff();
 }
 
-void PLD_tinyEPD::writeRegister(char address, char val1, char val2, char val3, char val4) {
+void PL_microEPD::writeRegister(char address, char val1, char val2, char val3, char val4) {
     digitalWrite(cs, LOW);
-    SPI.transfer(address);
-    SPI.transfer(val1);
-    if (val2>-1) SPI.transfer(val2);
-    if (val3>-1) SPI.transfer(val3);
-    if (val4>-1) SPI.transfer(val4);
+    SPI1.transfer(address);
+    SPI1.transfer(val1);
+    if (val2>-1) SPI1.transfer(val2);
+    if (val3>-1) SPI1.transfer(val3);
+    if (val4>-1) SPI1.transfer(val4);
     digitalWrite(cs, HIGH);
     waitForBusyInactive();
 }
 
-void PLD_tinyEPD::TrippleWhiteErase() {
+void PL_microEPD::WhiteErase() {
     clear();
     updateFull();
     invertDisplay();
@@ -170,67 +157,15 @@ void PLD_tinyEPD::TrippleWhiteErase() {
     updateFull();
 }
 
-void PLD_tinyEPD::invertDisplay() {
+void PL_microEPD::invertDisplay() {
     for (int i=0; i<arraySize(buffer); i++) {
         buffer[i] = ~buffer[i];
 	}
-	SPI.transfer(buffer, NULL, arraySize(buffer), NULL);
+	SPI1.transfer(buffer, NULL, arraySize(buffer), NULL);
 }
 
-void PLD_tinyEPD::waitForBusyInactive(){
+void PL_microEPD::waitForBusyInactive(){
     while (digitalRead(busy) == LOW) {Particle.process();}
 }
 
 
-BO_BMA250::BO_BMA250(uint8_t _cs2) {
-    cs2     = _cs2;     //BMA250 accelerometer
-}
-
-void BO_BMA250::initializeBMA250() {
-    pinMode(cs2, OUTPUT);
-    digitalWrite(cs2, LOW);
-    SPI.transfer(0x0F);			//set g
-    SPI.transfer(ACC_GSEL);
-    digitalWrite(cs2, HIGH);
-    digitalWrite(cs2, LOW);
-    SPI.transfer(0x10);			//set bandwith
-    SPI.transfer(ACC_BW);
-    digitalWrite(cs2, HIGH);
-}
-
-void BO_BMA250::activateTapOnInt1() {
-    digitalWrite(cs2, LOW);
-    SPI.transfer(0x16);			//enable interrupt
-    SPI.transfer(0x20);
-    digitalWrite(cs2, HIGH);
-    digitalWrite(cs2, LOW);
-    SPI.transfer(0x19);			//enable interrupt
-    SPI.transfer(0x20);
-    digitalWrite(cs2, HIGH);
-    
-    digitalWrite(cs2, LOW);
-    SPI.transfer(0x2B);			//adjust tab sensitivy (1..1F, the lower the more sensitive)
-    SPI.transfer(0x01);
-    digitalWrite(cs2, HIGH);
-    
-    digitalWrite(cs2, LOW);
-    SPI.transfer(0x21);			//interrupt mode = temporary, 1s
-    SPI.transfer(0x03);
-    digitalWrite(cs2, HIGH);
-}
-
-void BO_BMA250::readAccel() {
-    digitalWrite(cs2, LOW);
-    SPI.transfer(0x02|0x80); 
-    x = SPI.transfer(0xFF);
-    x |= SPI.transfer(0xFF) << 8;
-    x >>= 6;
-    y = SPI.transfer(0xFF);
-    y |= SPI.transfer(0xFF) << 8;
-    y >>= 6;
-    z = SPI.transfer(0xFF);
-    z |= SPI.transfer(0xFF) << 8;
-    z >>= 6;
-    temp = SPI.transfer(0xFF);
-    digitalWrite(cs2, HIGH);
-}
