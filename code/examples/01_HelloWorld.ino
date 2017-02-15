@@ -16,6 +16,7 @@ void setup() {
     SPI1.setDataMode(SPI_MODE0); 
     SPI1.setClockDivider(SPI_CLOCK_DIV4);
     display.begin(true);                //Initialize the ePaper and reset the screen
+    display.setCursor(0,3);             //Set cursor to avoid cut-off text
     display.print("Hello World!");      //Write “Hello World!” into the buffer
     display.updateFull();               //Trigger an update based on the buffer content
 }
