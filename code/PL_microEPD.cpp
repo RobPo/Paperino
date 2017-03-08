@@ -12,10 +12,11 @@ void PL_microEPD::begin(bool whiteErase) {
     pinMode(cs, OUTPUT);
     pinMode(rst, OUTPUT);
     pinMode(busy, INPUT);
+    delay(1);
     digitalWrite(rst, HIGH);
     waitForBusyInactive();
     digitalWrite(rst, LOW);
-    waitForBusyInactive();
+    delay(1);
     digitalWrite(rst, HIGH);
     waitForBusyInactive();
     writeRegister(EPD_PANELSETTING, 0x12, -1, -1, -1);      //Panel setting: Selected gate output as VGL; non-selected as VGH; Gate-Scan G0..G159; Source-Scan S0..S239; Source driver order: Interlaced
@@ -93,9 +94,16 @@ void PL_microEPD::powerOff() {
 void PL_microEPD::writeBuffer(){
     //writeRegister(EPD_PIXELACESSPOS, 0, 159, -1, -1);			//Pixel Access position: X-Start-Address=0; Y-Start-Address=GL-1 --> 1.4"
     writeRegister(EPD_PIXELACESSPOS, 0, 147, -1, -1);			//Pixel Access position: X-Start-Address=0; Y-Start-Address=GL-1 --> 1.1"
-    digitalWrite(cs, LOW);
-    SPI1.transfer(0x10);
-	SPI1.transfer(buffer, NULL, arraySize(buffer), NULL);
+     digitalWrite(cs, LOW);
+    if (PLATFORM_ID==103) {                                     //If Bluz then don't use DMA transfer
+        SPI.transfer(0x10);
+            for (int i=0; i < arraySize(buffer); i++){
+                SPI.transfer(buffer[i]);
+            }            
+    } else {                                                    //...else use faster DMA transfer
+        SPI.transfer(0x10);
+	    SPI.transfer(buffer, NULL, arraySize(buffer), NULL);
+    }
     digitalWrite(cs, HIGH);
     waitForBusyInactive();
 }
