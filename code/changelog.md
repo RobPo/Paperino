@@ -15,6 +15,9 @@
 - function drawPixel, drawPic and clear code cleaned up 
 - Analog clock demo added
 
+### 2016/10/18
+- Hello World demo added
+
 ### 2016/8/26
 - class acceleromter added
 - Tap demo added (cheap touch simulation)
@@ -23,7 +26,7 @@
 - WakeOnTap demo added (connect INT1 & WKP pin)
 
 ### 2016/8/23
+- Hurray. First release!
 - Based on 1.4" PL-EPD
 
-### 2016/10/18
-- Hello World demo added
+
