@@ -1,9 +1,9 @@
 Paperino PL_microEPD Arduino Library
 ===============================================================
-![Paperino E-Paper Shield for Particle, Breakout Board and Driver Module](Paperino/pics/holy_tripel.png)  
+![Paperino E-Paper Shield for Particle, Breakout Board and Driver Module](https://raw.githubusercontent.com/RobPo/Paperino/master/pics/holy_tripel.png)  
 [*Paperino E-Paper Shield for Particle, Breakout Board and Driver Module*](https://www.crowdsupply.com/robert-poser/paperino)
 
-Hardware Library for the 1.1” E-Paper displays (EPD) from Plastic Logic for Adafruits GFX library. 
+Hardware Library for the 1.1” E-Paper display (EPD) from Plastic Logic for Adafruits GFX library. 
 This display uses six GPIOs to communicate (4-wire SPI, reset pin, busy pin).
 
 Repository Contents
