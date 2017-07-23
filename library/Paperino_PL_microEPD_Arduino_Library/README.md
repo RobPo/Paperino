@@ -17,7 +17,7 @@ Documentation
 --------------
 
 * **[Installing an Arduino Library Guide](https://learn.sparkfun.com/tutorials/installing-an-arduino-library)** - Basic information on how to install an Arduino library.
-* **[Product Repository](https://github.com/RobPo/Paperino)** - Main repository (including hardware files & documentation) for the Paperino EPD Shield & Breakoutboard.
+* **[Product Repository](https://github.com/RobPo/Paperino)** - Main repository including hardware files & documentation.
 * **[Hookup Guide](https://robpo.github.io/Paperino/hookupEPD/)** - Basic hookup guide for Paperino E-Paper display.
 
 License Information
