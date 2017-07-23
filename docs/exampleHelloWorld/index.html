@@ -53,24 +53,19 @@
                         <ul class="dropdown-menu">
                             
 <li >
-    <a href="../hookupEPD/">Micro EPD</a>
+    <a href="../hookupOverview/">Overview</a>
 </li>
                             
 <li >
-    <a href="../hookupACC/">Accelerometer</a>
-</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
-<li >
-    <a href="../refEPD/">Micro EPD</a>
+    <a href="../hookupEPD/">Particle Web-IDE</a>
 </li>
                             
 <li >
-    <a href="../refACCEL/">Accelerometer</a>
+    <a href="../hookupEPD/">Arduino Web-IDE</a>
+</li>
+                            
+<li >
+    <a href="../hookupEPD/">Arduino IDE</a>
 </li>
                         </ul>
                     </li>
@@ -87,27 +82,19 @@
 </li>
                             
 <li >
+    <a href="../example4GLs/">Graylevels</a>
+</li>
+                            
+<li >
     <a href="../exampleUpdateMode/">Update Modes</a>
 </li>
                             
 <li >
-    <a href="../exampleComingSoon/">Counter demo (tap-based)</a>
+    <a href="../exampleTapCounter/">Tap Counter</a>
 </li>
                             
 <li >
-    <a href="../exampleComingSoon/">Stop watch (tap-based)</a>
-</li>
-                            
-<li >
-    <a href="../exampleComingSoon/">Portrait/landscape detection</a>
-</li>
-                            
-<li >
-    <a href="../exampleComingSoon/">WakeOnTap demo</a>
-</li>
-                            
-<li >
-    <a href="../exampleComingSoon/">Thermometer</a>
+    <a href="../exampleWakeOnTap/">WakeOnTap</a>
 </li>
                         </ul>
                     </li>
@@ -120,7 +107,7 @@
                     </a>
                 </li>
                     <li >
-                        <a rel="next" href="../refACCEL/">
+                        <a rel="next" href="../hookupEPD/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
@@ -137,43 +124,44 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#example-hello-world">Example: Hello World!</a></li>
-            <li><a href="#code">Code</a></li>
+        <li class="main active"><a href="#example-1-hello-world">Example 1: Hello World!</a></li>
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#sketch">Sketch</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="example-hello-world">Example: Hello World!</h1>
-<p>In this initial tutorial we show you how to initialize the ePaper display and write “Hello World!” on the screen. It is the shortest possible demo, you will see it’s really simple:-)</p>
-<h2 id="code">Code</h2>
-<pre><code>//PAPERINO: Hello World example for the Paperino Micro ePaper breakoutboard
+<h1 id="example-1-hello-world">Example 1: Hello World!</h1>
+<p>In this first section we show you how to initialize the ePaper display and write “Hello World!” on the screen. It is the shortest possible demo, you will see it’s really simple!</p>
+<h2 id="demo">Demo</h2>
+<p><img alt="Hello World! demo" src="../img/DemoHelloWorld.gif" /></p>
+<h2 id="sketch">Sketch</h2>
+<p>Now let’s have a look at the code: The first lines in the setup section are required to define the SPI settings needed to communicate with the display IC. Before you can talk to your display, the function <code>begin()</code> needs to be called once in the <code>setup()</code> loop.  This initialises your ePaper screen and resets it to a solid white background. To write text, the function <code>print()</code> or <code>println()</code> can be used. Call <code>update()</code> to actually trigger an update. This refresh the screen with the content of the previously filled image buffer. The running demo should look like the video in the section above.</p>
+<pre><code>#include &quot;Adafruit_GFX.h&quot;
+#include &quot;PL_microEPD.h&quot;
 
-#include "Adafruit_mfGFX.h"
-#include "PL_microEPD.h"
-#include "fonts.h"
+#define EPD_RST     A0
+#define EPD_BUSY    A1
+#define EPD_CS      A2
 
-#define EPD_CS      D5                  //SPI CS of the ePaper screen
-#define EPD_RST     A0                  //Reset pin
-#define EPD_BUSY    A1                  //Busy pin
+PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);  
 
-PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);
+void setup() {  
+    SPI.begin();                    // SPI-Bus initialisation
+    SPI.setBitOrder(MSBFIRST);                 
+    SPI.setDataMode(SPI_MODE0); 
+    SPI.setClockDivider(SPI_CLOCK_DIV4);
 
-void setup() {
-    SPI1.begin();
-    SPI1.setBitOrder(MSBFIRST);                 
-    SPI1.setDataMode(SPI_MODE0); 
-    SPI1.setClockDivider(SPI_CLOCK_DIV4);
-    display.begin(true);                //Initialize the ePaper and reset the screen
-    display.print(“Hello World!”);      //Write “Hello World!” into the buffer
-    display.updateFull();               //Trigger an update based on the buffer content
+    display.begin();                // Paperino ePaper initialisation and refresh screen 
+    display.println(&quot;Hello World!&quot;);// Write message into memory buffer
+    display.update();               // Trigger a full image update
 }
 
-void loop() {
-    }
+void loop() {              
+}
 </code></pre>
-<p>Now let’s have a look at the code: Before you can talk to your display, the function <code>display.begin(true)</code> needs to be called once in the <code>setup()</code> loop.  This initialises your ePaper screen and resets the display to a solid white background. To write text, the function <code>display.print()</code> can be used. To actually trigger an update, call <code>display.updateFull()</code>. This updates the screen with the content of the previously filled image buffer. The running demo then looks like this:</p>
-<p><img alt="Hello World! demo" src="../img/HelloWorld2.gif" /></p>
-<p>Are you interested in printing more complicated things on the screen? Then let’s proceed with the <a href="../exampleGFXdemo/">next example</a>, which shows you how to draw text in different fonts and sizes and how to draw graphic elements like lines, circles &amp; rectangles.</p></div>
+
+<p>Are you interested in printing more complicated things on the screen? Then let’s proceed with the following <a href="../exampleGFXdemo/">GFX example</a>, which shows you how to draw text in different sizes and how to draw graphic elements like lines, circles &amp; rectangles.</p></div>
         </div>
 
         <footer class="col-md-12">

@@ -53,24 +53,19 @@
                         <ul class="dropdown-menu">
                             
 <li >
-    <a href="../hookupEPD/">Micro EPD</a>
+    <a href="../hookupOverview/">Overview</a>
 </li>
                             
 <li >
-    <a href="../hookupACC/">Accelerometer</a>
-</li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reference <b class="caret"></b></a>
-                        <ul class="dropdown-menu">
-                            
-<li >
-    <a href="../refEPD/">Micro EPD</a>
+    <a href="../hookupEPD/">Particle Web-IDE</a>
 </li>
                             
 <li >
-    <a href="../refACCEL/">Accelerometer</a>
+    <a href="../hookupEPD/">Arduino Web-IDE</a>
+</li>
+                            
+<li >
+    <a href="../hookupEPD/">Arduino IDE</a>
 </li>
                         </ul>
                     </li>
@@ -86,28 +81,20 @@
     <a href="../exampleGFXdemo/">GFX demo</a>
 </li>
                             
+<li >
+    <a href="../example4GLs/">Graylevels</a>
+</li>
+                            
 <li class="active">
     <a href="./">Update Modes</a>
 </li>
                             
 <li >
-    <a href="../exampleComingSoon/">Counter demo (tap-based)</a>
+    <a href="../exampleTapCounter/">Tap Counter</a>
 </li>
                             
 <li >
-    <a href="../exampleComingSoon/">Stop watch (tap-based)</a>
-</li>
-                            
-<li >
-    <a href="../exampleComingSoon/">Portrait/landscape detection</a>
-</li>
-                            
-<li >
-    <a href="../exampleComingSoon/">WakeOnTap demo</a>
-</li>
-                            
-<li >
-    <a href="../exampleComingSoon/">Thermometer</a>
+    <a href="../exampleWakeOnTap/">WakeOnTap</a>
 </li>
                         </ul>
                     </li>
@@ -120,12 +107,12 @@
                     </a>
                 </li>
                     <li >
-                        <a rel="next" href="../exampleGFXdemo/">
+                        <a rel="next" href="../example4GLs/">
                             <i class="fa fa-arrow-left"></i> Previous
                         </a>
                     </li>
                     <li >
-                        <a rel="prev" href="../exampleComingSoon/">
+                        <a rel="prev" href="../exampleTapCounter/">
                             Next <i class="fa fa-arrow-right"></i>
                         </a>
                     </li>
@@ -137,88 +124,115 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#example-update-modes">Example: Update Modes!</a></li>
-            <li><a href="#full-updates-default">Full updates (default)</a></li>
-            <li><a href="#partial-updates">Partial updates</a></li>
-            <li><a href="#code">Code</a></li>
+        <li class="main active"><a href="#example-4-update-modes">Example 4: Update Modes</a></li>
+            <li><a href="#update-modes">Update Modes</a></li>
+            <li><a href="#demo">Demo</a></li>
+            <li><a href="#sketch">Sketch</a></li>
     </ul>
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="example-update-modes">Example: Update Modes!</h1>
-<p>In the previous example, we learned how to initialise the ePaper and how to write different content on the screen. Now let’s have a look at <em>two</em> different ways an ePaper display can be updated: A high quality update mode (“Full updates”) and a fast and responsive B&amp;W update mode (“Partial updates”). As usual, the last section contains the code for a demo.</p>
-<h2 id="full-updates-default">Full updates (default)</h2>
-<p>The command <code>display.updateFull()</code> triggers an update where all pixels are updated simultaneously. The underlying waveform is tuned to achieve a maximum number of grey levels and to minimise <em>ghosting</em>, which is the effect of seeing remaining parts of the previous image content. As a side effect, a flickering becomes visible which is typical for all ePaper-based displays. We recommend this setting if you start playing with Paperino as the default update mode.</p>
-<h2 id="partial-updates">Partial updates</h2>
-<p>The command <code>display.updatePartial()</code> triggers an update where only the changing pixels are updated (i.e. the text, but not the white background). The underlying waveform supports only two grey level (black &amp; white) which allows a faster and more responsive update time without the typical flickering. Furthermore, the power consumption is reduced since less pixels are switching effectively. Calling many partial updates sequentially can reduce the quality of the static image areas, that’s why we recommend to trigger <strong>one full update after max. of 10 partial updates</strong>.  This assures that these static pixels are also reset regularly.</p>
-<h2 id="code">Code</h2>
-<p><img alt="Demo of different update modes" src="../img/UpdateModes.gif" /></p>
-<pre><code>//************************************************
-// PAPERINO: Full updates vs. partial update demo
-//************************************************
-
-#include &quot;Adafruit_mfGFX.h&quot;
-#include &quot;fonts.h&quot;
+<h1 id="example-4-update-modes">Example 4: Update Modes</h1>
+<p>In the previous examples, we learned how to <a href="../exampleHelloWorld/">initialise</a> the display, how to write different <a href="../exampleGFXdemo/">graphics &amp; text</a> and how to use different <a href="../example4GLs/">graylevels</a>. Now let’s have a look at three different ways how to update an ePaper screen. </p>
+<h2 id="update-modes">Update Modes</h2>
+<p>The E-Paper library defines the following three update modes <code>EPD_UPD_FULL</code>, <code>EPD_UPD_PART</code> and <code>EPD_MONO</code>.
+<code>EPD_UPD_FULL</code> is set by default, achieves four graylevels, takes about 800ms and refreshes all pixels. This is the update mode having the best image quality. <code>EPD_UPD_PART</code> is a variant of the previous one but only changing pixels are refreshed. This results in less flickering for the price of a slightly higher pixel to pixel crosstalk. <code>EPD_MONO</code> is again a variant of the previous update mode but only about 250ms long. This allows slightly faster and more responsive updates for the price of supporting only two graylevels (<code>EPD_BLACK</code> and <code>EPD_WHITE</code>). Depending on your application it is recommended to insert a full update <code>EPD_UPD_FULL</code> after a couple of mono updates to increase the image quality. </p>
+<h2 id="demo">Demo</h2>
+<p><img alt="Demo of different update modes" src="../img/DemoUpdateModes.gif" /></p>
+<h2 id="sketch">Sketch</h2>
+<pre><code>#include &quot;Adafruit_GFX.h&quot;
 #include &quot;PL_microEPD.h&quot;
 
 #define EPD_RST     A0
 #define EPD_BUSY    A1
-#define EPD_CS      D5
+#define EPD_CS      A2
 
 PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY); 
 
+
 void setup() {
-    SPI1.begin();
-    SPI1.setBitOrder(MSBFIRST);                 
-    SPI1.setDataMode(SPI_MODE0); 
-    SPI1.setClockDivider(SPI_CLOCK_DIV4);
-    display.begin(true);                    //Initializing. TRUE=Initial update to refresh the screen to defined state
+    SPI.begin();                            // SPI initialisation
+    SPI.setBitOrder(MSBFIRST);                 
+    SPI.setDataMode(SPI_MODE0); 
+    SPI.setClockDivider(SPI_CLOCK_DIV4);
+    display.begin();                        // Paperino ePaper initialisation and refresh screen 
 
     display.setTextSize(2);
-    display.print(&quot;Update Modes&quot;);          //Writes content into image buffer
-    display.updateFull();                   //Triggers a full image update, showing content of the imagebuffer
-    delay(2000);
+    display.println(&quot;Update Modes&quot;);
+    display.setTextSize(1);
+    display.println(&quot;-Full Update&quot;);
+    display.println(&quot;-Partial Update&quot;);          
+    display.println(&quot;-Partial Mono Update&quot;);          
+    display.update();                       // Triggers a Full update, 4 GL, 800ms
+
+    delay(4000);
+    display.clear();
+    display.setTextSize(2);
+    display.print(&quot;EPD_UPD_FULL&quot;);          
+    display.update();                       // Triggers a Full update, 4 GL, 800ms
+    delay(1000);
     display.setTextSize(1);
     display.print(&quot;This is a &quot;);
-    display.setTextColor(3, 0);
+    display.setTextColor(EPD_WHITE, EPD_BLACK);
     display.println(&quot;full update.&quot;);
-    display.updateFull();                   //Triggers a full image update, showing content of the imagebuffer
-    delay(2000);
-    display.setTextColor(0, 3);
+    display.update();                   
+    delay(1000);
+    display.setTextColor(EPD_BLACK, EPD_WHITE);
     display.println(&quot;All pixels are reset no matter whether they are changing or not.&quot;);
-    display.updateFull();
-    delay(3000);
+    display.update();
+    delay(2000);
     display.println(&quot;Hm, a bit boring, isn't it...?&quot;);
-    display.updateFull();
+    display.update();
 
-    delay(5000);
+    delay(4000);
     display.clear();
-    display.setCursor(1,4);
-    display.updateFull();                   //Triggers a full image update, showing content of the imagebuffer
     display.setTextSize(2);
-    display.println(&quot;OK!&quot;);                 //Writes content into image buffer
-    display.updatePartial();                //Triggers a full image update, showing content of the imagebuffer
-    delay(2000);
+    display.print(&quot;EPD_UPD_PART&quot;);                 
+    display.update(EPD_UPD_PART);           // Triggers a Partial update, 4 GL, 800ms
+    delay(1000);
     display.setTextSize(1);
-    display.print(&quot;Now you can see &quot;);
-    display.setTextColor(3, 0);
+    display.print(&quot;OK! Now you see &quot;);
+    display.setTextColor(EPD_WHITE, EPD_BLACK);
     display.print(&quot;partial updates!&quot;);
-    display.updatePartial();                //Triggers a full image update, showing content of the imagebuffer
-    delay(2000);
-    display.setTextColor(0, 3);
+    display.update(EPD_UPD_PART);                
+    delay(1000);
+    display.setTextColor(EPD_BLACK, EPD_WHITE);
     display.print(&quot; Only changing  pixels are updated. &quot;);
-    display.updatePartial();
-    delay(2000);
+    display.update(EPD_UPD_PART);
+    delay(1000);
     display.print(&quot;Thisgenerates less flicker  and results in lower    power consumption. &quot;);
-    display.updatePartial();
+    display.update(EPD_UPD_PART);
 
+    delay(4000);
+    display.clear();
+    display.setTextSize(2);
+    display.print(&quot;EPD_UPD_MONO&quot;);                 
+    display.update(EPD_UPD_MONO);           // Triggers a Partial Mono update, 2 GL, 250ms
+    delay(1000);
+    display.setTextSize(1);
+    display.setTextColor(EPD_WHITE, EPD_BLACK);
+    display.print(&quot;Mono updates&quot;);
+    display.setTextColor(EPD_BLACK, EPD_WHITE);
+    display.print(&quot; allow a bitfaster update rates &quot;);
+    display.update(EPD_UPD_MONO);                
+    delay(1000);
+    display.print(&quot;(butsupport only two grey-  levels).&quot;);
+    display.update(EPD_UPD_MONO);
+
+    delay(1000);
+    display.drawRect(9, 51, 125, 14, 0);
+    display.update(EPD_UPD_MONO);
+    for (int i=1; i&lt;18; i++) {
+        display.fillRect(6 + 7*i, 53, 5, 10, 0);
+        display.update(EPD_UPD_MONO);
+    }
 }
 
 void loop() {
 }
 </code></pre>
 
-<p>Congratulation! You now learned the basics of running an ePaper screen. Interested in more? In the next examples we learn how to use the integrated accelerometer as a cheap touch emulator.</p></div>
+<p>Congratulation! You now learned the basics of running an ePaper screen. Interested in more? In the next examples we learn how to make use of the integrated accelerometer as a cheap touch emulator.</p></div>
         </div>
 
         <footer class="col-md-12">
