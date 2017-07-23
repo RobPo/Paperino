@@ -18,12 +18,12 @@ Documentation
 
 * **[Installing an Arduino Library Guide](https://learn.sparkfun.com/tutorials/installing-an-arduino-library)** - Basic information on how to install an Arduino library.
 * **[Product Repository](https://github.com/RobPo/Paperino)** - Main repository (including hardware files & documentation) for the Paperino EPD Shield & Breakoutboard.
-* **[https://robpo.github.io/Paperino/hookupEPD/](https://learn.sparkfun.com/tutorials/si7021-humidity-and-temperature-sensor-hookup-guide)** - Basic hookup guide for the Si7021.
+* **[Hookup Guide](https://robpo.github.io/Paperino/hookupEPD/)** - Basic hookup guide for Paperino E-Paper display.
 
 License Information
 -------------------
 
-This product is _**open source**_!
+This library is _**open source**_!
 
 Created by Robert Poser, July 19th 2017, Dresden/Germany
 Released under BSD license (3-clause BSD license), check license.txt for more informations.
@@ -31,4 +31,4 @@ Released under BSD license (3-clause BSD license), check license.txt for more in
 We invested time and resources providing this open source code, please support Paperino and 
 open source hardware @Adafruit and by purchasing this product @Crowdsupply @Paperino @Plasticlogic
 
-If you have any questions or concerns on licensing, please contact display.paperino@gmail.com.
+Having problems or have awesome suggestions? Contact us: display.paperino@gmail.com.
