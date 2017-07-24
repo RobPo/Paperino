@@ -1,5 +1,5 @@
 Paperino PL_microEPD Arduino Library
-===============================================================/Users/Laetterman/paperino/Paperino/library.properties
+===============================================================
 
 Welcome to the Paperino docs!
 
