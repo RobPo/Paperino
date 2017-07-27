@@ -13,7 +13,7 @@ SYSTEM_MODE(SEMI_AUTOMATIC);
 #define EPD_RST     A0
 #define EPD_BUSY    A1
 #define EPD_CS      A2
-#define ACC_CS      D0
+#define ACC_CS      D6
 
 #include "Adafruit_GFX.h"
 #include "PL_microEPD.h"
