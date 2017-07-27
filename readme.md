@@ -25,6 +25,8 @@ Projects
 -------------------
 [![Project TrafficIndicator at Hackaday.io](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/TrafficIndicator.png)](https://hackaday.io/project/22002-trafficindicator-between-workhome-or-vice-versa)  
 
+[![Project IoT Connected Desk Frame at Hackaday.io](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/projIoTPictureFrame.png)](https://hackaday.io/project/21638-iot-connected-picturedesk-frame)  
+
 License Information
 -------------------
 
