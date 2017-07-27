@@ -296,11 +296,11 @@ BO_BMA250::BO_BMA250(uint8_t _cs2) {
 void BO_BMA250::begin() {
     pinMode(cs2, OUTPUT);
     digitalWrite(cs2, LOW);
-    SPI.transfer(0x0F);			//set g
+    SPI.transfer(0x0F);			// Set g
     SPI.transfer(ACC_GSEL);
     digitalWrite(cs2, HIGH);
     digitalWrite(cs2, LOW);
-    SPI.transfer(0x10);			//set bandwith
+    SPI.transfer(0x10);			// Set bandwith
     SPI.transfer(ACC_BW);
     digitalWrite(cs2, HIGH);
 }
@@ -311,24 +311,37 @@ void BO_BMA250::begin() {
 
 void BO_BMA250::activateTapOnInt1() {
     digitalWrite(cs2, LOW);
-    SPI.transfer(0x16);			//enable interrupt
+    SPI.transfer(0x16);			// Enable single tap interrupt
     SPI.transfer(0x20);
     digitalWrite(cs2, HIGH);
     digitalWrite(cs2, LOW);
-    SPI.transfer(0x19);			//enable interrupt
+    SPI.transfer(0x19);			// Map single tap interrupt to Int1 pin
     SPI.transfer(0x20);
     digitalWrite(cs2, HIGH);
     
     digitalWrite(cs2, LOW);
-    SPI.transfer(0x2B);			//adjust tab sensitivy (1..1F, the lower the more sensitive)
+    SPI.transfer(0x2B);			// Adjust tab sensitivity (01..1F, the lower the more sensitive)
     SPI.transfer(0x01);
     digitalWrite(cs2, HIGH);
     
     digitalWrite(cs2, LOW);
-    SPI.transfer(0x21);			//interrupt mode = temporary, 1s
-    SPI.transfer(0x03);
+    SPI.transfer(0x21);			// Set Interrupt mode = temporary or latched (0x0F)
+    SPI.transfer(0x0F);
     digitalWrite(cs2, HIGH);
 }
+
+
+// ************************************************************************************
+// CLEARLATCHEDINT - As the name suggests the latched INT1 is cleared by this function
+// ************************************************************************************
+
+void BO_BMA250::clearLatchedInt1() {
+    digitalWrite(cs2, LOW);
+    SPI.transfer(0x21);			// Clear latched Int1
+    SPI.transfer(0x80);
+    digitalWrite(cs2, HIGH);
+}
+
 
 // ************************************************************************************
 // READACCCEL - Sensing the device position in space by returning X, Y, Z coordinates.
