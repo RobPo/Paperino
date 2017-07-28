@@ -18,11 +18,9 @@ SYSTEM_MODE(SEMI_AUTOMATIC);
 #include "Adafruit_GFX.h"
 #include "PL_microEPD.h"
 
-
 PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);  
 BO_BMA250   accel(ACC_CS);
 int         i       = 0;
-bool        status  = false;     //0 = stopped, 1 = running
 
 void setup() {
     pinMode(WKP, INPUT);
@@ -56,16 +54,12 @@ void setup() {
 
 void loop() {
     if (digitalRead(WKP)==HIGH) {
-        status = !status; 
-        if (status==true) {
-            i+=1;
-            display.fillRect(0, 4, 70, 43, EPD_WHITE);
-            display.setTextSize(6);
-            display.setCursor(0,4);
-            display.print(i);
-            display.update(EPD_UPD_MONO);
-            status = !status;
-        };
-        delay(1000);
-    };
+        i+=1;
+        display.fillRect(0, 4, 70, 43, EPD_WHITE);
+        display.setTextSize(6);
+        display.setCursor(0,4);
+        display.print(i);
+        display.update(EPD_UPD_MONO);
+        accel.clearLatchedInt1();
+    }
 }

@@ -46,11 +46,12 @@ void setup() {
     display.drawCircle(0, 36, 95, EPD_LGRAY);
     display.setTextSize(1);
     display.setCursor(0, 52);
-    display.print("Please dbl-tap to wakeup& increase the counter!");
+    display.print("Please tap to wakeup &  increase the counter!");
     display.update();
     
     accel.begin();
     accel.activateTapOnInt1();
+    accel.clearLatchedInt1();
 }
 
 void loop() {
