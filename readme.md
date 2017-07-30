@@ -40,4 +40,4 @@ Released under BSD license (3-clause BSD license), check license.txt for more in
 We invested time and resources providing this open source code, please support Paperino and 
 open source hardware @Adafruit and by purchasing this product @Crowdsupply @Paperino @Plasticlogic
 
-Having problems or have awesome suggestions? Contact us: display.paperino@gmail.com.
+Having problems or have awesome suggestions? Contact us: paperino.display@gmail.com.
