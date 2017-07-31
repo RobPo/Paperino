@@ -1,42 +1,42 @@
 {
     "docs": [
         {
-            "location": "/hookup/", 
+            "location": "/", 
             "text": "Hookup Guide\n\n\nThe tutorial is split into the following three sections:\n\n\n\n\n1) Hardware Hookup\n \u2013 How to connect the breakout board with your microcontroller.\n\n\n2) Including the Adafruit GFX library\n \u2013 How to include the library.\n\n\n3) Verifying the pin mapping\n \u2013 Review the pin mapping and adjust if necessary.\n\n\n\n\n1) Hardware Hookup\n\n\n\n\n\n\nNow it\u2019s time to wire things up! The breakout board provides access to 12 pins. The following table provides an overview of how the connect the pins for some typical Arduino MCUs:\n\n\n\n\n\n\n\n\n#\n\n\nPin\n\n\nFunction\n\n\nPhoton* / Electron / Bluz\n\n\nArduino MKRFOX1200\n\n\nNodeMCU\n\n\nWeMos D1 Mini\n\n\n\n\n\n\n\n\n\n\n1\n\n\nMOS\n\n\nSPI MOSI\n\n\nA5\n\n\nMOSI\n\n\n\n\n\n\n\n\n\n\n2\n\n\nMIS\n\n\nSPI MISO\n\n\nA4\n\n\nMISO\n\n\n\n\n\n\n\n\n\n\n3\n\n\nCLK\n\n\nSPI clock\n\n\nA3\n\n\nSCK\n\n\n\n\n\n\n\n\n\n\n4\n\n\nCS1\n\n\nSPI chip select for ePaper driver IC\n\n\nA2**\n\n\nA2**\n\n\n\n\n\n\n\n\n\n\n5\n\n\nRST\n\n\nDigital pin to reset driver IC UC8156\n\n\nA0**\n\n\nA0**\n\n\n\n\n\n\n\n\n\n\n6\n\n\nBSY\n\n\nDigital pin to sense activity state of driver IC UC8156\n\n\nA1**\n\n\nA1**\n\n\n\n\n\n\n\n\n\n\n7\n\n\n3V3\n\n\nRegulated 3.3V power supply\n\n\n3V3\n\n\nVCC\n\n\n\n\n\n\n\n\n\n\n8\n\n\nGND\n\n\nGround\n\n\nGND\n\n\nGND\n\n\n\n\n\n\n\n\n\n\n9\n\n\n-\n\n\n(unused)\n\n\n(unused)\n\n\n(unused)\n\n\n\n\n\n\n\n\n\n\n10\n\n\nCS2\n\n\nSPI chip select for accelerometer IC\n\n\nD6**\n\n\nA6**\n\n\n\n\n\n\n\n\n\n\n11\n\n\nIN2\n\n\nInterrupt line #2, e.g. for tap sensing\n\n\nWKP**\n\n\nA5**\n\n\n\n\n\n\n\n\n\n\n12\n\n\nIN1\n\n\nInterrupt line #1, e.g. for wake-up of deep sleeping MCU\n\n\nWKP**\n\n\n(not supported)\n\n\n\n\n\n\n\n\n\n\n\n\n* Same wiring as for Paperino Shield for Particle used\n** or any other free GPIO pin\n\n\n2) Using the Adafruit GFX Library with Paperino E-Paper display\n\n\nNow that we have wired-up the Paperino breakout board with the MCU, it\u2019s time to get started writing your own application! For this we\u2019ll need to include the \nAdafruit GFX library\n and the hardware-specific library \nPL_microEPD\n. The integration varies depending on your used IDE.\n\n\nParticle Web-IDE\n\n\nIf you are using the Particle Web-IDE, then please start by going to the Library Manager and search for \nPL_microEPD\n. Select one of the demos, i.e. \n_01_HelloWorld.ino\n and click on the button \nUse this example.\n This pastes a copy of the demo into your private App section. Now let\u2019s repeat this step again by searching for \nAdafruit_GFX\n and add this library to this demo file by pressing the button \nInclude in Project\n.\n\n\nArduino Web-IDE\n\n\nIf you are developing sketches with the Arduino Web-IDE\n\n\nArduino-IDE\n\n\n3) Verifying the pin mapping\n\n\nAfter you have included the library, its time to review and verify the pin mapping with the available pins of your used microcontroller:\n\n\n#define EPD_RST     A0      // Reset pin, used to restart the driver IC\n#define EPD_BUSY    A1      // Busy pin, used to sense the activity state of the driver IC\n#define EPD_CS      A2      // Chip select pin, used to select the EPD driver IC\n\n\n\nThat wasn\u2019t too difficult, right? If you are interested in how to write more complex features on the ePaper we suggest starting with the examples section.", 
             "title": "Hookup guide"
         }, 
         {
-            "location": "/hookup/#hookup-guide", 
+            "location": "/#hookup-guide", 
             "text": "The tutorial is split into the following three sections:   1) Hardware Hookup  \u2013 How to connect the breakout board with your microcontroller.  2) Including the Adafruit GFX library  \u2013 How to include the library.  3) Verifying the pin mapping  \u2013 Review the pin mapping and adjust if necessary.", 
             "title": "Hookup Guide"
         }, 
         {
-            "location": "/hookup/#1-hardware-hookup", 
+            "location": "/#1-hardware-hookup", 
             "text": "Now it\u2019s time to wire things up! The breakout board provides access to 12 pins. The following table provides an overview of how the connect the pins for some typical Arduino MCUs:     #  Pin  Function  Photon* / Electron / Bluz  Arduino MKRFOX1200  NodeMCU  WeMos D1 Mini      1  MOS  SPI MOSI  A5  MOSI      2  MIS  SPI MISO  A4  MISO      3  CLK  SPI clock  A3  SCK      4  CS1  SPI chip select for ePaper driver IC  A2**  A2**      5  RST  Digital pin to reset driver IC UC8156  A0**  A0**      6  BSY  Digital pin to sense activity state of driver IC UC8156  A1**  A1**      7  3V3  Regulated 3.3V power supply  3V3  VCC      8  GND  Ground  GND  GND      9  -  (unused)  (unused)  (unused)      10  CS2  SPI chip select for accelerometer IC  D6**  A6**      11  IN2  Interrupt line #2, e.g. for tap sensing  WKP**  A5**      12  IN1  Interrupt line #1, e.g. for wake-up of deep sleeping MCU  WKP**  (not supported)       * Same wiring as for Paperino Shield for Particle used\n** or any other free GPIO pin", 
             "title": "1) Hardware Hookup"
         }, 
         {
-            "location": "/hookup/#2-using-the-adafruit-gfx-library-with-paperino-e-paper-display", 
+            "location": "/#2-using-the-adafruit-gfx-library-with-paperino-e-paper-display", 
             "text": "Now that we have wired-up the Paperino breakout board with the MCU, it\u2019s time to get started writing your own application! For this we\u2019ll need to include the  Adafruit GFX library  and the hardware-specific library  PL_microEPD . The integration varies depending on your used IDE.", 
             "title": "2) Using the Adafruit GFX Library with Paperino E-Paper display"
         }, 
         {
-            "location": "/hookup/#particle-web-ide", 
+            "location": "/#particle-web-ide", 
             "text": "If you are using the Particle Web-IDE, then please start by going to the Library Manager and search for  PL_microEPD . Select one of the demos, i.e.  _01_HelloWorld.ino  and click on the button  Use this example.  This pastes a copy of the demo into your private App section. Now let\u2019s repeat this step again by searching for  Adafruit_GFX  and add this library to this demo file by pressing the button  Include in Project .", 
             "title": "Particle Web-IDE"
         }, 
         {
-            "location": "/hookup/#arduino-web-ide", 
+            "location": "/#arduino-web-ide", 
             "text": "If you are developing sketches with the Arduino Web-IDE", 
             "title": "Arduino Web-IDE"
         }, 
         {
-            "location": "/hookup/#arduino-ide", 
+            "location": "/#arduino-ide", 
             "text": "", 
             "title": "Arduino-IDE"
         }, 
         {
-            "location": "/hookup/#3-verifying-the-pin-mapping", 
+            "location": "/#3-verifying-the-pin-mapping", 
             "text": "After you have included the library, its time to review and verify the pin mapping with the available pins of your used microcontroller:  #define EPD_RST     A0      // Reset pin, used to restart the driver IC\n#define EPD_BUSY    A1      // Busy pin, used to sense the activity state of the driver IC\n#define EPD_CS      A2      // Chip select pin, used to select the EPD driver IC  That wasn\u2019t too difficult, right? If you are interested in how to write more complex features on the ePaper we suggest starting with the examples section.", 
             "title": "3) Verifying the pin mapping"
         }, 
