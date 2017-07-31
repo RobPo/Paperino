@@ -4,15 +4,15 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-07-24</lastmod>
+     <lastmod>2017-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>/hookupEPD/</loc>
-     <lastmod>2017-07-24</lastmod>
+     <loc>/hookup/</loc>
+     <lastmod>2017-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -21,37 +21,37 @@
         
     <url>
      <loc>/exampleHelloWorld/</loc>
-     <lastmod>2017-07-24</lastmod>
+     <lastmod>2017-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/exampleGFXdemo/</loc>
-     <lastmod>2017-07-24</lastmod>
+     <lastmod>2017-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/example4GLs/</loc>
-     <lastmod>2017-07-24</lastmod>
+     <lastmod>2017-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/exampleUpdateMode/</loc>
-     <lastmod>2017-07-24</lastmod>
+     <lastmod>2017-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/exampleTapCounter/</loc>
-     <lastmod>2017-07-24</lastmod>
+     <lastmod>2017-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
     <url>
      <loc>/exampleWakeOnTap/</loc>
-     <lastmod>2017-07-24</lastmod>
+     <lastmod>2017-07-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
         
