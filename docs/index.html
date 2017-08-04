@@ -103,7 +103,7 @@
         <div class="container">
                 <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
     <ul class="nav bs-sidenav">
-        <li class="main active"><a href="#hookup-guide">Hookup Guide</a></li>
+        <li class="main active"><a href="#hookup-guide-2">Hookup Guide 2</a></li>
             <li><a href="#1-hardware-hookup">1) Hardware Hookup</a></li>
             <li><a href="#2-using-the-adafruit-gfx-library-with-paperino-e-paper-display">2) Using the Adafruit GFX Library with Paperino E-Paper display</a></li>
             <li><a href="#3-verifying-the-pin-mapping">3) Verifying the pin mapping</a></li>
@@ -111,7 +111,7 @@
 </div></div>
                 <div class="col-md-9" role="main">
 
-<h1 id="hookup-guide">Hookup Guide</h1>
+<h1 id="hookup-guide-2">Hookup Guide 2</h1>
 <p>The tutorial is split into the following three sections:</p>
 <ul>
 <li><a href="# Hardware Hookup">1) Hardware Hookup</a> – How to connect the breakout board with your microcontroller.</li>
@@ -122,7 +122,8 @@
 <p><img alt="Screenshot" src="./img/FritzingPhoton.png" />
 <img alt="Screenshot" src="./img/FritzingMKRFOX1200.png" />
 <img alt="Screenshot" src="./img/FritzingWeMosD1mini.png" />
-<img alt="Screenshot" src="./img/FritzingNodeMCU.png" /></p>
+<img alt="Screenshot" src="./img/FritzingNodeMCU.png" />
+<img alt="Screenshot" src="./img/FritzingRaspberryPiZeroW.png" /></p>
 <p>Now it’s time to wire things up! The breakout board provides access to 12 pins. The following table provides an overview of how the connect the pins for some typical Arduino MCUs:</p>
 <table>
 <thead>
@@ -133,7 +134,8 @@
 <th>Photon* / Electron / Bluz</th>
 <th>Arduino MKRFOX1200</th>
 <th>NodeMCU</th>
-<th>WeMos D1 Mini</th>
+<th>WeMosD1 Mini</th>
+<th>Raspberry Pi Zero W</th>
 </tr>
 </thead>
 <tbody>
@@ -145,6 +147,7 @@
 <td>MOSI</td>
 <td>D7</td>
 <td>D7</td>
+<td>MOSI</td>
 </tr>
 <tr>
 <td>2</td>
@@ -154,6 +157,7 @@
 <td>MISO</td>
 <td>D6</td>
 <td>D6</td>
+<td>MISO</td>
 </tr>
 <tr>
 <td>3</td>
@@ -163,6 +167,7 @@
 <td>SCK</td>
 <td>D5</td>
 <td>D5</td>
+<td>SCK</td>
 </tr>
 <tr>
 <td>4</td>
@@ -172,22 +177,25 @@
 <td>A2**</td>
 <td>D2**</td>
 <td>D2**</td>
+<td>D2**</td>
 </tr>
 <tr>
 <td>5</td>
 <td>RST</td>
-<td>Digital pin to reset driver IC UC8156</td>
+<td>Digital pin to reset driver IC</td>
 <td>A0**</td>
 <td>A0**</td>
+<td>D0**</td>
 <td>D0**</td>
 <td>D0**</td>
 </tr>
 <tr>
 <td>6</td>
 <td>BSY</td>
-<td>Digital pin to sense activity state of driver IC UC8156</td>
+<td>Digital pin to sense state of driver IC</td>
 <td>A1**</td>
 <td>A1**</td>
+<td>D1**</td>
 <td>D1**</td>
 <td>D1**</td>
 </tr>
@@ -199,6 +207,7 @@
 <td>VCC</td>
 <td>3V3</td>
 <td>3V3</td>
+<td>3V3</td>
 </tr>
 <tr>
 <td>8</td>
@@ -208,10 +217,12 @@
 <td>GND</td>
 <td>GND</td>
 <td>G</td>
+<td>GND</td>
 </tr>
 <tr>
 <td>9</td>
 <td>-</td>
+<td>(unused)</td>
 <td>(unused)</td>
 <td>(unused)</td>
 <td>(unused)</td>
@@ -226,6 +237,7 @@
 <td>A6**</td>
 <td>D3**</td>
 <td>D3**</td>
+<td>D3**</td>
 </tr>
 <tr>
 <td>11</td>
@@ -235,12 +247,14 @@
 <td>A5**</td>
 <td>D4**</td>
 <td>D4**</td>
+<td>D4**</td>
 </tr>
 <tr>
 <td>12</td>
 <td>IN1</td>
 <td>Interrupt line #1, e.g. for wake-up of deep sleeping MCU</td>
 <td>WKP**</td>
+<td>(not sup.)</td>
 <td>(not sup.)</td>
 <td>(not sup.)</td>
 <td>(not sup.)</td>
@@ -301,5 +315,5 @@
 
 <!--
 MkDocs version : 0.16.1
-Build Date UTC : 2017-08-03 19:51:29
+Build Date UTC : 2017-08-04 19:04:03
 -->
