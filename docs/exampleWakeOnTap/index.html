@@ -116,7 +116,7 @@
 <h2 id="accelerometer-tap-detection">Accelerometer: Tap detection</h2>
 <p>The following sketch shows you who to detect a finger tap and increase a counter based on the users input.</p>
 <h2 id="demo">Demo</h2>
-<p><img alt="Demo of different update modes" src="../img/UpdateModes.gif" /></p>
+<p><img alt="Demo of different update modes" src="../img/DemoTap.gif" /></p>
 <h2 id="sketch">Sketch</h2>
 <pre><code>SYSTEM_MODE(SEMI_AUTOMATIC);
 STARTUP(System.enableFeature(FEATURE_RETAINED_MEMORY));
@@ -128,7 +128,6 @@ STARTUP(System.enableFeature(FEATURE_RETAINED_MEMORY));
 
 #include &quot;Adafruit_GFX.h&quot;
 #include &quot;PL_microEPD.h&quot;
-#include &quot;BO_BMA250E.h&quot;
 
 PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);  
 BO_BMA250   accel(ACC_CS);
@@ -166,9 +165,7 @@ void setup() {
 void loop() {
     System.sleep(SLEEP_MODE_DEEP, 3600);
 }
-</code></pre>
-
-<p>In the next example we’ll see how to use the accelerometer interrupt to wake-up a micro controller. This enables us to put the MCU in deep-sleep for most of the times which is a good approach to reduce the overall power consumption.</p></div>
+</code></pre></div>
         </div>
 
         <footer class="col-md-12">
