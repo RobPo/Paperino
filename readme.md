@@ -42,4 +42,6 @@ open source hardware @Adafruit and by purchasing this product @Crowdsupply @Pape
 
 Having problems or have awesome suggestions? Contact us: paperino.display@gmail.com.
 
+```html
 <a href="https://twitter.com/paperino_io" class="twitter-follow-button" data-show-count="false">Follow @paperino_io</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+```
