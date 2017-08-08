@@ -41,3 +41,5 @@ We invested time and resources providing this open source code, please support P
 open source hardware @Adafruit and by purchasing this product @Crowdsupply @Paperino @Plasticlogic
 
 Having problems or have awesome suggestions? Contact us: paperino.display@gmail.com.
+
+<a href="https://twitter.com/paperino_io" class="twitter-follow-button" data-show-count="false">Follow @paperino_io</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
