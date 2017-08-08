@@ -40,8 +40,7 @@ Released under BSD license (3-clause BSD license), check license.txt for more in
 We invested time and resources providing this open source code, please support Paperino and 
 open source hardware @Adafruit and by purchasing this product @Crowdsupply @Paperino @Plasticlogic
 
+If you like this project please follow Paperino on [Twitter](https://twitter.com/paperino_io).
+
 Having problems or have awesome suggestions? Contact us: paperino.display@gmail.com.
 
-{::nomarkdown}
-<a href="https://twitter.com/paperino_io" class="twitter-follow-button" data-show-count="false">Follow @paperino_io</a><script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-{:/}
