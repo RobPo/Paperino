@@ -4,9 +4,9 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        
+
+
+
         <link rel="shortcut icon" href="../img/favicon.ico">
         <title>WakeOnTap - Paperino Docs</title>
         <link href="../css/bootstrap-custom.min.css" rel="stylesheet">
@@ -18,10 +18,10 @@
             <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
             <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
-	
+
 	<script src="../js/jquery-1.10.2.min.js"></script>
         <script src="../js/bootstrap-3.0.3.min.js"></script>
-        <script src="../js/highlight.pack.js"></script> 
+        <script src="../js/highlight.pack.js"></script>
     </head>
 
     <body>
@@ -51,27 +51,27 @@
                     <li class="dropdown active">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Examples <b class="caret"></b></a>
                         <ul class="dropdown-menu">
-                            
+
 <li >
     <a href="../exampleHelloWorld/">Hello World!</a>
 </li>
-                            
+
 <li >
     <a href="../exampleGFXdemo/">GFX demo</a>
 </li>
-                            
+
 <li >
     <a href="../example4GLs/">Graylevels</a>
 </li>
-                            
+
 <li >
     <a href="../exampleUpdateMode/">Update Modes</a>
 </li>
-                            
+
 <li >
     <a href="../exampleTapCounter/">Tap Counter</a>
 </li>
-                            
+
 <li class="active">
     <a href="./">WakeOnTap</a>
 </li>
@@ -124,19 +124,19 @@ STARTUP(System.enableFeature(FEATURE_RETAINED_MEMORY));
 #define EPD_RST     A0
 #define EPD_BUSY    A1
 #define EPD_CS      A2
-#define ACC_CS      D0
+#define ACC_CS      D6
 
 #include &quot;Adafruit_GFX.h&quot;
 #include &quot;PL_microEPD.h&quot;
 
-PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);  
+PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);
 BO_BMA250   accel(ACC_CS);
 retained int i = 0;
 
 void setup() {
     SPI.begin();
-    SPI.setBitOrder(MSBFIRST);                 
-    SPI.setDataMode(SPI_MODE0); 
+    SPI.setBitOrder(MSBFIRST);
+    SPI.setDataMode(SPI_MODE0);
     SPI.setClockDivider(SPI_CLOCK_DIV4);
 
     i+=1;
