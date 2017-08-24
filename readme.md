@@ -23,7 +23,7 @@ Paperino also integrates an easy to use accelerometer. It extends the EPD by tap
 
 Installation
 -------------------
-Recent Arduino IDE releases as well as the Particle & Arduino Web-IDEs include the **Library Manager** for easy installation. You can install this library from there by searching for `PL_microEPD`. Alternatively, click the DOWNLOAD ZIP button, uncompress and rename the uncompressed folder to `PL_microEPD`. You may need to create the Libraries subfolder if its your first library. Restart the IDE.
+Recent Arduino IDE releases as well as the Particle & Arduino Web-IDEs include the **Library Manager** for easy installation. You can install this library by searching for `PL_microEPD`. 
 
 
 Projects
