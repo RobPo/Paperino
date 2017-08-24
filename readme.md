@@ -21,6 +21,11 @@ Paperino is an easy to use micro EPD breakout-board for the Photon or other Ardu
 
 Paperino also integrates an easy to use accelerometer. It extends the EPD by tap-sensing functions and offers portrait/landscape detection. Furthermore you can wake-up your MCU after movement-based events from deep-sleeping, saving battery live during waiting phases.
 
+Installation
+-------------------
+Recent Arduino IDE releases as well as the Particle & Arduino Web-IDEs include the **Library Manager** for easy installation. You can install this library from there by searching for `PL_microEPD`. Alternatively, click the DOWNLOAD ZIP button, uncompress and rename the uncompressed folder to `PL_microEPD`. You may need to create the Libraries subfolder if its your first library. Restart the IDE.
+
+
 Projects
 -------------------
 [![Project TrafficIndicator at Hackaday.io](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/TrafficIndicator.png)](https://hackaday.io/project/22002-trafficindicator-between-workhome-or-vice-versa) [![Project IoT Connected Desk Frame at Hackaday.io](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/projIoTPictureFrame.png)](https://hackaday.io/project/21638-iot-connected-picturedesk-frame)  
