@@ -28,7 +28,7 @@ Recent Arduino IDE releases as well as the Particle & Arduino Web-IDEs include t
 
 Projects
 -------------------
-[![Project TrafficIndicator at Hackaday.io](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/TrafficIndicator.png)](https://hackaday.io/project/22002-trafficindicator-between-workhome-or-vice-versa) [![Project IoT Connected Desk Frame at Hackaday.io](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/projIoTPictureFrame.png)](https://hackaday.io/project/21638-iot-connected-picturedesk-frame)  
+[![Project TrafficIndicator at Hackaday.io](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/TrafficIndicator.png)](https://hackaday.io/project/22002-trafficindicator-between-workhome-or-vice-versa) [![Project IoT Connected Desk Frame at Hackaday.io](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/projIoTPictureFrame.png)](https://hackaday.io/project/21638-iot-connected-picturedesk-frame) [![Project local rain forecast for fair weather cyclists at Hackster.io](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/proj1hrRainForecast.png)](https://www.hackster.io/robert-poser/epaper-based-local-rain-forecast-for-fair-weather-cyclists-cb168c)  
 
 Featured In
 -------------------
