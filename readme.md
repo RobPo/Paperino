@@ -3,7 +3,7 @@ Paperino PL_microEPD Arduino Library
 
 Welcome to the Paperino docs!
 
-![Paperino E-Paper Shield for Particle, Breakout Board and Driver Module](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/holy_tripel.png)  
+![Paperino E-Paper Shield for Particle, Breakout Board and Driver Module](https://user-images.githubusercontent.com/21104467/29744828-50b878b2-8aad-11e7-8448-8b2f45289c4c.png)  
 [*Paperino E-Paper Shield for Particle, Breakout Board and Driver Module*](https://www.crowdsupply.com/robert-poser/paperino)
 
 Hardware Library for the 1.1” E-Paper display (EPD) from Plastic Logic for Adafruits GFX library. 
@@ -28,11 +28,13 @@ Recent Arduino IDE releases as well as the Particle & Arduino Web-IDEs include t
 
 Projects
 -------------------
-[![Project TrafficIndicator at Hackaday.io](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/TrafficIndicator.png)](https://hackaday.io/project/22002-trafficindicator-between-workhome-or-vice-versa) [![Project IoT Connected Desk Frame at Hackaday.io](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/projIoTPictureFrame.png)](https://hackaday.io/project/21638-iot-connected-picturedesk-frame) [![Project local rain forecast for fair weather cyclists at Hackster.io](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/proj1hrRainForecast.png)](https://www.hackster.io/robert-poser/epaper-based-local-rain-forecast-for-fair-weather-cyclists-cb168c)  
+[![Project TrafficIndicator at Hackaday.io](https://user-images.githubusercontent.com/21104467/29744843-761172a8-8aad-11e7-8e60-a01fffbf1ea6.png)](https://hackaday.io/project/22002-trafficindicator-between-workhome-or-vice-versa) 
+[![Project IoT Connected Desk Frame at Hackaday.io](https://user-images.githubusercontent.com/21104467/29744849-891f23a4-8aad-11e7-8b91-d1db8494546d.png)](https://hackaday.io/project/21638-iot-connected-picturedesk-frame) 
+[![Project local rain forecast for fair weather cyclists at Hackster.io](https://user-images.githubusercontent.com/21104467/29744854-98f1e4b0-8aad-11e7-8356-7e5f55b207e4.png)](https://www.hackster.io/robert-poser/epaper-based-local-rain-forecast-for-fair-weather-cyclists-cb168c)  
 
 Featured In
 -------------------
-![As Featured In](https://raw.githubusercontent.com/RobPo/Paperino/master/docs/img/FeaturedIn.png)
+![As Featured In](https://user-images.githubusercontent.com/21104467/29744858-a7aaefba-8aad-11e7-8f06-d41a8eaac7fb.png)
 
 License Information
 -------------------
