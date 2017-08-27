@@ -13,7 +13,7 @@ Documentation
 This is the place to get started with your new hardware! ;-) We have divided the documentation into the following sections:
 * **[Hookup Guide](https://robpo.github.io/Paperino/)** - Step-by-step instructions to get your Paperino setup and run within minutes.
 * **[Examples](https://robpo.github.io/Paperino/exampleHelloWorld/)** - Ready to use examples for your own inspiration.
-* **[Reference](https://github.com/RobPo/Paperino/tree/master/datasheets)** - Datasheets & Application Notes.
+* **[Reference](https://github.com/RobPo/Paperino/tree/gh-pages/datasheets)** - Datasheets & Application Notes.
 
 ### So, what is Paperino?
 
