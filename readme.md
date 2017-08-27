@@ -14,6 +14,7 @@ This is the place to get started with your new hardware! ;-) We have divided the
 * **[Hookup Guide](https://robpo.github.io/Paperino/)** - Step-by-step instructions to get your Paperino setup and run within minutes.
 * **[Examples](https://robpo.github.io/Paperino/exampleHelloWorld/)** - Ready to use examples for your own inspiration.
 * **[Reference](https://github.com/RobPo/Paperino/tree/gh-pages/datasheets)** - Datasheets & Application Notes.
+* **[Hardware](https://github.com/RobPo/Paperino/tree/gh-pages/hardware)** - Schematics & PCB layouts.
 
 ### So, what is Paperino?
 
