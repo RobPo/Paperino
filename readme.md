@@ -24,16 +24,18 @@ Paperino also integrates an easy to use accelerometer. It extends the EPD by tap
 
 Installation
 -------------------
-This library is part of Particle’s & Arduino’s **Library Manager**. For easy installation please search for `PL_microEPD` within the Manager and download the package. Six example sketches are part of the library, please start playing with them first to learn the basics about driving this ePaper screen.
+This library is part of the Particle and Arduino **Library Manager**. For easy installation please search for `PL_microEPD` within the Manager and download the library. Six example sketches are part of the package. Please start with them first to learn the basics about driving of this ePaper screen.
 
 Distributors
 -------------------
-Paperino ePaper displays are currently available at [Crowd Supply](crowdsupply.com/robert-poser/paperino) and at [Watterott electronic](http://www.watterott.com/de/Paperino-A-micro-ePaper-with-accelerometer).
+Paperino ePaper displays are available at [Crowd Supply](crowdsupply.com/robert-poser/paperino) and at [Watterott electronic](http://www.watterott.com/de/Paperino-A-micro-ePaper-with-accelerometer).
 
 
 Projects
 -------------------
 These demo projects are for your inspiration! What will you implement with Paperino? Tell us, we’ll love to add your project here!
+
+
 [![Project TrafficIndicator at Hackaday.io](https://user-images.githubusercontent.com/21104467/29744843-761172a8-8aad-11e7-8e60-a01fffbf1ea6.png)](https://hackaday.io/project/22002-trafficindicator-between-workhome-or-vice-versa) 
 [![Project IoT Connected Desk Frame at Hackaday.io](https://user-images.githubusercontent.com/21104467/29744849-891f23a4-8aad-11e7-8b91-d1db8494546d.png)](https://hackaday.io/project/21638-iot-connected-picturedesk-frame) 
 [![Project local rain forecast for fair weather cyclists at Hackster.io](https://user-images.githubusercontent.com/21104467/29744854-98f1e4b0-8aad-11e7-8356-7e5f55b207e4.png)](https://www.hackster.io/robert-poser/epaper-based-local-rain-forecast-for-fair-weather-cyclists-cb168c)  
