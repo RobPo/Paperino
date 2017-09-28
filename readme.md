@@ -8,6 +8,10 @@ Welcome to the Paperino docs!
 
 Hardware Library for the 1.1” E-Paper display (EPD) from Plastic Logic for Adafruits GFX library. 
 
+Featured In
+-------------------
+![As Featured In](https://user-images.githubusercontent.com/21104467/29744858-a7aaefba-8aad-11e7-8f06-d41a8eaac7fb.png)
+
 Documentation
 --------------
 This is the place to get started with your new hardware! ;-) We have divided the documentation into the following sections:
@@ -28,7 +32,7 @@ This library is part of the Particle and Arduino **Library Manager**. For easy i
 
 Distributors
 -------------------
-Paperino ePaper displays are available at [Crowd Supply](crowdsupply.com/robert-poser/paperino) and at [Watterott electronic](http://www.watterott.com/de/Paperino-A-micro-ePaper-with-accelerometer).
+Paperino ePaper displays are available at [Crowd Supply](https://www.crowdsupply.com/robert-poser/paperino) and at [Watterott electronic](http://www.watterott.com/de/Paperino-A-micro-ePaper-with-accelerometer).
 
 
 Projects
@@ -40,9 +44,7 @@ These demo projects are for your inspiration! What will you implement with Paper
 [![Project IoT Connected Desk Frame at Hackaday.io](https://user-images.githubusercontent.com/21104467/29744849-891f23a4-8aad-11e7-8b91-d1db8494546d.png)](https://hackaday.io/project/21638-iot-connected-picturedesk-frame) 
 [![Project local rain forecast for fair weather cyclists at Hackster.io](https://user-images.githubusercontent.com/21104467/29744854-98f1e4b0-8aad-11e7-8356-7e5f55b207e4.png)](https://www.hackster.io/robert-poser/epaper-based-local-rain-forecast-for-fair-weather-cyclists-cb168c)  
 
-Featured In
--------------------
-![As Featured In](https://user-images.githubusercontent.com/21104467/29744858-a7aaefba-8aad-11e7-8f06-d41a8eaac7fb.png)
+
 
 License Information
 -------------------
