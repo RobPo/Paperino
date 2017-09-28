@@ -24,11 +24,16 @@ Paperino also integrates an easy to use accelerometer. It extends the EPD by tap
 
 Installation
 -------------------
-Recent Arduino IDE releases as well as the Particle & Arduino Web-IDEs include the **Library Manager** for easy installation. You can install this library by searching for `PL_microEPD`. 
+This library is part of Particle’s & Arduino’s **Library Manager**. For easy installation please search for `PL_microEPD` within the Manager and download the package. Six example sketches are part of the library, please start playing with them first to learn the basics about driving this ePaper screen.
+
+Distributors
+-------------------
+Paperino ePaper displays are currently available at [Crowd Supply](crowdsupply.com/robert-poser/paperino) and at [Watterott electronic](http://www.watterott.com/de/Paperino-A-micro-ePaper-with-accelerometer).
 
 
 Projects
 -------------------
+These demo projects are for your inspiration! What will you implement with Paperino? Tell us, we’ll love to add your project here!
 [![Project TrafficIndicator at Hackaday.io](https://user-images.githubusercontent.com/21104467/29744843-761172a8-8aad-11e7-8e60-a01fffbf1ea6.png)](https://hackaday.io/project/22002-trafficindicator-between-workhome-or-vice-versa) 
 [![Project IoT Connected Desk Frame at Hackaday.io](https://user-images.githubusercontent.com/21104467/29744849-891f23a4-8aad-11e7-8b91-d1db8494546d.png)](https://hackaday.io/project/21638-iot-connected-picturedesk-frame) 
 [![Project local rain forecast for fair weather cyclists at Hackster.io](https://user-images.githubusercontent.com/21104467/29744854-98f1e4b0-8aad-11e7-8356-7e5f55b207e4.png)](https://www.hackster.io/robert-poser/epaper-based-local-rain-forecast-for-fair-weather-cyclists-cb168c)  
@@ -43,10 +48,10 @@ License Information
 This library is _**open source**_!
 
 Created by Robert Poser, July 19th 2017, Dresden/Germany
-Released under BSD license (3-clause BSD license), check license.txt for more informations.
+Released under BSD license (3-clause BSD license), check license.md for more information.
 
 We invested time and resources providing this open source code, please support Paperino and 
-open source hardware @Adafruit and by purchasing this product @Crowdsupply @Paperino @Plasticlogic.
+open source hardware @Adafruit and by purchasing this product @Crowdsupply @Watterott @Plasticlogic.
 
 If you like this project please [follow us on Twitter](https://twitter.com/paperino_io).
 Having problems or have awesome suggestions? Contact us: paperino.display@gmail.com.
