@@ -26,9 +26,36 @@ Paperino is an easy to use micro EPD breakout-board for the Photon or other Ardu
 
 Paperino also integrates an easy to use accelerometer. It extends the EPD by tap-sensing functions and offers portrait/landscape detection. Furthermore you can wake-up your MCU after movement-based events from deep-sleeping, saving battery live during waiting phases.
 
-Installation
+How To Use
 -------------------
-This library is part of the Particle and Arduino **Library Manager**. For easy installation please search for `PL_microEPD` within the Manager and download the library. Six example sketches are part of the package. Please start with them first to learn the basics about driving of this ePaper screen.
+
+### Installation
+This library is part of the Particle and Arduino **Library Manager**. For easy installation please search for `PL_microEPD` within the Manager and download the library. Six example sketches are part of the package to learn the basics about this ePaper screen.
+
+### Example: Hello World!
+Let’s start with the easiest one:
+
+```cpp
+#include "Adafruit_GFX.h"
+#include "PL_microEPD.h"
+
+#define EPD_CS      A2
+PL_microEPD display(EPD_CS);  
+
+void setup() {  
+    SPI.begin();                    // SPI-Bus initialisation
+    SPI.setBitOrder(MSBFIRST);                 
+    SPI.setDataMode(SPI_MODE0); 
+    SPI.setClockSpeed(4, MHZ);
+  
+    display.begin();                // Paperino ePaper initialisation and refresh screen 
+    display.println("Hello World!");// Write message into memory buffer
+    display.update();               // Trigger a full image update
+}
+
+void loop() {              
+}
+```
 
 Distributors
 -------------------
