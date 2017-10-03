@@ -30,10 +30,13 @@ How To Use
 -------------------
 
 ### Installation
-This library is part of the Particle and Arduino **Library Manager**. For easy installation please search for `PL_microEPD` within the Manager and download the library. Six example sketches are part of the package to learn the basics about this ePaper screen.
+This library is part of the Particle and Arduino **Library Manager**. Please search for `PL_microEPD` within the Manager and download the library, that’s it! Included are six example sketches, they are usefull to learn the basics about this ePaper screen.
+
+### Wiring
+
 
 ### Example: Hello World!
-Let’s start with the easiest one:
+This is the shortest possible [demo](https://robpo.github.io/Paperino/exampleHelloWorld/) and shows how to address the ePaper:
 
 ```cpp
 #include "Adafruit_GFX.h"
@@ -43,19 +46,20 @@ Let’s start with the easiest one:
 PL_microEPD display(EPD_CS);  
 
 void setup() {  
-    SPI.begin();                    // SPI-Bus initialisation
+    SPI.begin();                    
     SPI.setBitOrder(MSBFIRST);                 
     SPI.setDataMode(SPI_MODE0); 
     SPI.setClockSpeed(4, MHZ);
   
-    display.begin();                // Paperino ePaper initialisation and refresh screen 
-    display.println("Hello World!");// Write message into memory buffer
-    display.update();               // Trigger a full image update
+    display.begin();                
+    display.println("Hello World!");
+    display.update();               
 }
 
 void loop() {              
 }
 ```
+Once this example is successfully running, please have a look at the following sketches: [GFX demo](https://robpo.github.io/Paperino/exampleGFXdemo/) shows how to draw all the letters, rectangles and dots. The [Graylevel](https://robpo.github.io/Paperino/example4GLs/) sketch explains how to use the four different graylevels in your next project. [Update modes](https://robpo.github.io/Paperino/exampleUpdateMode/) describes three different ways of updating an ePaper screen.
 
 Distributors
 -------------------
