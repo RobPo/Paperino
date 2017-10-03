@@ -35,8 +35,8 @@ This library is part of the Particle and Arduino **Library Manager**. Please sea
 ### Wiring
 
 
-### Example: Hello World!
-This is the shortest possible [demo](https://robpo.github.io/Paperino/exampleHelloWorld/) and shows how to address the ePaper:
+### Hello World!
+This is the [first](https://robpo.github.io/Paperino/exampleHelloWorld/), and shortest possible demo and shows how to address the ePaper:
 
 ```cpp
 #include "Adafruit_GFX.h"
