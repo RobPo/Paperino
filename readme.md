@@ -3,14 +3,15 @@ Paperino PL_microEPD Arduino Library
 
 Welcome to the Paperino docs! This is a Hardware Library for the 1.1” E-Paper display (EPD) from Plastic Logic for Adafruits GFX library. 
 
+
+![Paperino E-Paper Shield for Particle, Breakout Board and Driver Module](https://user-images.githubusercontent.com/21104467/29744828-50b878b2-8aad-11e7-8448-8b2f45289c4c.png)  
+[*Paperino E-Paper Shield for Particle, Breakout Board and Driver Module*](https://www.crowdsupply.com/robert-poser/paperino)
+
 ### So, what is Paperino?
 
 Paperino is an easy to use micro EPD breakout-board for the Photon or other Arduino-compatible microcontrollers. The eInk-based ePaper display mimics the appearance of natural paper and is capable of holding text and images indefinitely, even without electricity. This makes Paperino perfect for your next battery-driven, connected project where the display content changes rarely.
 
 Paperino also integrates an easy to use accelerometer. It extends the EPD by tap-sensing functions and offers portrait/landscape detection. Furthermore you can wake-up your MCU after movement-based events from deep-sleeping, saving battery live during waiting phases.
-
-![Paperino E-Paper Shield for Particle, Breakout Board and Driver Module](https://user-images.githubusercontent.com/21104467/29744828-50b878b2-8aad-11e7-8448-8b2f45289c4c.png)  
-[*Paperino E-Paper Shield for Particle, Breakout Board and Driver Module*](https://www.crowdsupply.com/robert-poser/paperino)
 
 
 Featured In
