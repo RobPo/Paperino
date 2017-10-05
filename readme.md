@@ -85,6 +85,11 @@ These demo projects are for your inspiration! What will you implement with Paper
 [![Project IoT Connected Desk Frame at Hackaday.io](https://user-images.githubusercontent.com/21104467/29744849-891f23a4-8aad-11e7-8b91-d1db8494546d.png)](https://hackaday.io/project/21638-iot-connected-picturedesk-frame) 
 [![Project local rain forecast for fair weather cyclists at Hackster.io](https://user-images.githubusercontent.com/21104467/29744854-98f1e4b0-8aad-11e7-8356-7e5f55b207e4.png)](https://www.hackster.io/robert-poser/epaper-based-local-rain-forecast-for-fair-weather-cyclists-cb168c)  
 
+Changelog
+-------------------
+- v1.0.20 - Simplified wiring (rst&busy optional) for MCUs with limited GPIOs
+- [v1.0.10](https://github.com/RobPo/Paperino/archive/v1.0.10.zip) -  Particle & Arduino Library Manager supported; Accelerometer tap sensitivity increased; Library verified by Particle
+- [v1.0.00](https://github.com/RobPo/Paperino/archive/v1.0.06.zip) - Initial release
 
 
 License Information

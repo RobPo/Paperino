@@ -5,30 +5,26 @@
    More details can be found in the online tutorial @https://robpo.github.io/Paperino
    
    We invested time and resources providing this open source code. Please support Paperino 
-   open source hardware by purchasing this product @Crowdsupply @Paperino @Plasticlogic 
+   open source hardware by purchasing this product @Crowdsupply @Watterott @Plasticlogic 
    https://www.crowdsupply.com/robert-poser/paperino 
-   Created by Robert Poser, May 18th 2017, Dresden/Germany
+   Created by Robert Poser, Oct 3rd 2017, Dresden/Germany
 **************************************************************************************** */
 SYSTEM_MODE(SEMI_AUTOMATIC);
 STARTUP(System.enableFeature(FEATURE_RETAINED_MEMORY));
 
-#define EPD_RST     A0
-#define EPD_BUSY    A1
 #define EPD_CS      A2
 #define ACC_CS      D6
 
 #include "Adafruit_GFX.h"
 #include "PL_microEPD.h"
-
-PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);  
+ 
+PL_microEPD display(EPD_CS);  
 BO_BMA250   accel(ACC_CS);
-retained 	int i = 0;
+retained    int i = 0;
 
 void setup() {
-    SPI.begin();
-    SPI.setBitOrder(MSBFIRST);                 
-    SPI.setDataMode(SPI_MODE0); 
-    SPI.setClockDivider(SPI_CLOCK_DIV4);
+    SPI.begin();                    // Bus initialisation, UC8156 supp. max 10Mhz (writing)
+    SPI.beginTransaction(SPISettings(4000000, MSBFIRST, SPI_MODE0));//and 6.6Mhz (reading)
   
     i+=1;
     display.begin(false);
