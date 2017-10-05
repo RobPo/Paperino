@@ -20,14 +20,13 @@ Featured In
 
 Documentation
 --------------
-This is the place to get started with your new hardware! ;-) We have divided the documentation into the following sections:
+This is the place to get started with your new hardware! We have divided the documentation into the following sections:
 
 
 * **[Hookup Guide](https://robpo.github.io/Paperino/)** - Step-by-step instructions to get your Paperino setup and run within minutes.
 * **[Examples](https://robpo.github.io/Paperino/exampleHelloWorld/)** - Ready to use examples for your own inspiration.
 * **[Reference](https://github.com/RobPo/Paperino/tree/gh-pages/datasheets)** - Datasheets & Application Notes.
 * **[Hardware](https://github.com/RobPo/Paperino/tree/gh-pages/hardware)** - Schematics & PCB layouts.
-
 
 
 How To Use
@@ -66,7 +65,7 @@ void loop() {
 }
 ```
 
-You should now be able to see the ePaper screen updating. Congratulation! If you feel more like a pro’ this is now the time to add the wiring of two more GPIO lines (called ‘busy’ & ‘reset’). They are needed to run the image updates a bit faster and/or to reset the IC after having it set to deep sleep.
+You should now be able to see the ePaper screen updating. Congratulation! If you feel more like a pro’ this is now the time to [add the wiring](https://robpo.github.io/Paperino/) of two more GPIO lines (called ‘busy’ & ‘reset’). They are needed to run the image updates a bit faster and/or to reset the IC after having it set to deep sleep.
 
 
 ### More…
@@ -93,8 +92,7 @@ License Information
 
 This library is _**open source**_!
 
-Created by Robert Poser, July 19th 2017, Dresden/Germany
-Released under BSD license (3-clause BSD license), check license.md for more information.
+Created by Robert Poser, Oct 5th 2017, Dresden/Germany. Released under BSD license (3-clause BSD license), check license.md for more information.
 
 We invested time and resources providing this open source code, please support Paperino and 
 open source hardware @Adafruit and by purchasing this product @Crowdsupply @Watterott @Plasticlogic.
