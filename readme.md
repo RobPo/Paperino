@@ -3,6 +3,12 @@ Paperino PL_microEPD Arduino Library
 
 Welcome to the Paperino docs! This is a Hardware Library for the 1.1” E-Paper display (EPD) from Plastic Logic for Adafruits GFX library. 
 
+### So, what is Paperino?
+
+Paperino is an easy to use micro EPD breakout-board for the Photon or other Arduino-compatible microcontrollers. The eInk-based ePaper display mimics the appearance of natural paper and is capable of holding text and images indefinitely, even without electricity. This makes Paperino perfect for your next battery-driven, connected project where the display content changes rarely.
+
+Paperino also integrates an easy to use accelerometer. It extends the EPD by tap-sensing functions and offers portrait/landscape detection. Furthermore you can wake-up your MCU after movement-based events from deep-sleeping, saving battery live during waiting phases.
+
 ![Paperino E-Paper Shield for Particle, Breakout Board and Driver Module](https://user-images.githubusercontent.com/21104467/29744828-50b878b2-8aad-11e7-8448-8b2f45289c4c.png)  
 [*Paperino E-Paper Shield for Particle, Breakout Board and Driver Module*](https://www.crowdsupply.com/robert-poser/paperino)
 
@@ -14,16 +20,14 @@ Featured In
 Documentation
 --------------
 This is the place to get started with your new hardware! ;-) We have divided the documentation into the following sections:
+
+
 * **[Hookup Guide](https://robpo.github.io/Paperino/)** - Step-by-step instructions to get your Paperino setup and run within minutes.
 * **[Examples](https://robpo.github.io/Paperino/exampleHelloWorld/)** - Ready to use examples for your own inspiration.
 * **[Reference](https://github.com/RobPo/Paperino/tree/gh-pages/datasheets)** - Datasheets & Application Notes.
 * **[Hardware](https://github.com/RobPo/Paperino/tree/gh-pages/hardware)** - Schematics & PCB layouts.
 
-### So, what is Paperino?
 
-Paperino is an easy to use micro EPD breakout-board for the Photon or other Arduino-compatible microcontrollers. The eInk-based ePaper display mimics the appearance of natural paper and is capable of holding text and images indefinitely, even without electricity. This makes Paperino perfect for your next battery-driven, connected project where the display content changes rarely.
-
-Paperino also integrates an easy to use accelerometer. It extends the EPD by tap-sensing functions and offers portrait/landscape detection. Furthermore you can wake-up your MCU after movement-based events from deep-sleeping, saving battery live during waiting phases.
 
 How To Use
 -------------------
@@ -38,7 +42,7 @@ To start communicating with the ePaper driver IC, you’ll need to supply 3.3V a
 
 ### Example: Hello World!
 
-This is the [first](https://robpo.github.io/Paperino/exampleHelloWorld/), and shortest possible demo and shows how to address the ePaper (don’t forget to update the correct GPIO number as described in the section above):
+This is the [first](https://robpo.github.io/Paperino/exampleHelloWorld/), and shortest possible demo and shows how to address the ePaper (don’t forget to update the GPIO name if needed in line 3):
 
 
 ```cpp
@@ -61,10 +65,10 @@ void loop() {
 }
 ```
 
-You should now be able to see the ePaper screen updating. Congratulation! If you feel more like a pro’ this is now the time to add two more GPIO lines (called ‘busy’ & ‘reset’). They are needed to run the image updates a bit faster and/or to reset the IC after having it set to deep sleeping previously.
+You should now be able to see the ePaper screen updating. Congratulation! If you feel more like a pro’ this is now the time to add the wiring of two more GPIO lines (called ‘busy’ & ‘reset’). They are needed to run the image updates a bit faster and/or to reset the IC after having it set to deep sleep.
 
 
-### More examples…
+### More…
 
 Once this example is successfully running, please have a look at the following sketches: [GFX demo](https://robpo.github.io/Paperino/exampleGFXdemo/) shows how to draw all the letters, rectangles and dots. The [Graylevel](https://robpo.github.io/Paperino/example4GLs/) sketch explains how to use the four different graylevels in your next project. [Update modes](https://robpo.github.io/Paperino/exampleUpdateMode/) describes three different ways of updating an ePaper screen.
 
