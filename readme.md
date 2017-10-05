@@ -87,9 +87,9 @@ These demo projects are for your inspiration! What will you implement with Paper
 
 Changelog
 -------------------
-- v1.0.20 - Simplified wiring (rst&busy optional) for MCUs with limited GPIOs
-- [v1.0.10](https://github.com/RobPo/Paperino/archive/v1.0.10.zip) -  Particle & Arduino Library Manager supported; Accelerometer tap sensitivity increased; Library verified by Particle
-- [v1.0.00](https://github.com/RobPo/Paperino/archive/v1.0.06.zip) - Initial release
+- v1.0.20 (10/2017) - Simplified wiring (rst&busy optional) for MCUs with limited GPIOs
+- [v1.0.10 (08/2017)](https://github.com/RobPo/Paperino/archive/v1.0.10.zip) -  Particle & Arduino Library Manager supported; BMA250 sensitivity increased; Library verified by Particle
+- [v1.0.00 (07/2017)](https://github.com/RobPo/Paperino/archive/v1.0.06.zip) - Initial release
 
 
 License Information
