@@ -84,6 +84,7 @@ These demo projects are for your inspiration! What will you implement with Paper
 [![Project TrafficIndicator at Hackaday.io](https://user-images.githubusercontent.com/21104467/29744843-761172a8-8aad-11e7-8e60-a01fffbf1ea6.png)](https://hackaday.io/project/22002-trafficindicator-between-workhome-or-vice-versa) 
 [![Project IoT Connected Desk Frame at Hackaday.io](https://user-images.githubusercontent.com/21104467/29744849-891f23a4-8aad-11e7-8b91-d1db8494546d.png)](https://hackaday.io/project/21638-iot-connected-picturedesk-frame) 
 [![Project local rain forecast for fair weather cyclists at Hackster.io](https://user-images.githubusercontent.com/21104467/29744854-98f1e4b0-8aad-11e7-8356-7e5f55b207e4.png)](https://www.hackster.io/robert-poser/epaper-based-local-rain-forecast-for-fair-weather-cyclists-cb168c)  
+[![Project Industrial Tap Tap Machine at Hackster.io](https://user-images.githubusercontent.com/21104467/32455931-232502bc-c324-11e7-889c-3bb081d23a78.png)
 
 Changelog
 -------------------
