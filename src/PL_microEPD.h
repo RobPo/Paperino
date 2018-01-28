@@ -78,7 +78,7 @@ private:
     int fontHeight=8, fontWidth=5;
     int nextline=EPD_WIDTH/4;
     void waitForBusyInactive(int duration);
-    void writeRegister(char address, char val1, char val2, char val3, char val4);
+    void writeRegister(char address, char val1, signed short val2, signed short val3, signed short val4);
     void writeBuffer(void);
     void WhiteErase(void);
     void powerOn(void);
