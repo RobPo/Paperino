@@ -174,7 +174,7 @@ void PL_microEPD::scrollText(String text, int cutout) {
         print(t);
         update(EPD_UPD_MONO);
         clear();
-        #ifdef defined(PLATFORM_ID)    // If Particle used, keep cloud connection alive
+        #if defined(PLATFORM_ID)    // If Particle used, keep cloud connection alive
             Particle.process();
         #endif
     }
