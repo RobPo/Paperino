@@ -166,7 +166,7 @@ void PL_microEPD::scrollText(String text, int cutout) {
     int temp_y = cursor_y;
     setTextWrap(false);
 
-    for (int offset = 0; offset < text.length(); offset++) {
+    for (unsigned int offset = 0; offset < text.length(); offset++) {
         String t = "";
         for (int i = 0; i < cutout; i++)
             t += text.charAt((offset + i));
