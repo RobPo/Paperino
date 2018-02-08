@@ -166,7 +166,7 @@ void PL_microEPD::scrollText(String text, int cutout) {
     int temp_y = cursor_y;
     setTextWrap(false);
 
-    for (int offset = 0; offset < text.length(); offset++) {
+    for (unsigned int offset = 0; offset < text.length(); offset++) {
         String t = "";
         for (int i = 0; i < cutout; i++)
             t += text.charAt((offset + i));
@@ -174,7 +174,7 @@ void PL_microEPD::scrollText(String text, int cutout) {
         print(t);
         update(EPD_UPD_MONO);
         clear();
-        #ifdef defined(PLATFORM_ID)    // If Particle used, keep cloud connection alive
+        #if defined(PLATFORM_ID)    // If Particle used, keep cloud connection alive
             Particle.process();
         #endif
     }
@@ -267,13 +267,13 @@ void PL_microEPD::writeBuffer(){
 // ************************************************************************************
 // WRITE REGISTER - Sets register ADDRESS to value VAL1 (optional: VAL2, VAL3, VAL4)
 // ************************************************************************************
-void PL_microEPD::writeRegister(char address, char val1, char val2, char val3, char val4) {
+void PL_microEPD::writeRegister(char address, char val1, signed short val2, signed short val3, signed short val4) {
     digitalWrite(cs, LOW);
     SPI.transfer(address);
     SPI.transfer(val1);
-    if (val2>-1) SPI.transfer(val2);
-    if (val3>-1) SPI.transfer(val3);
-    if (val4>-1) SPI.transfer(val4);
+    if (val2>-1) SPI.transfer(val2 & 0xFF);
+    if (val3>-1) SPI.transfer(val3 & 0xFF);
+    if (val4>-1) SPI.transfer(val4 & 0xFF);
     digitalWrite(cs, HIGH);
     waitForBusyInactive(EPD_TMG_SR2);
 }
