@@ -62,8 +62,12 @@ open source hardware by purchasing this product @Crowd_supply @Watterott @Plasti
 class PL_microEPD : public Adafruit_GFX {
 
 public:
+<<<<<<< HEAD
     PL_microEPD(int8_t _cs, int8_t _rst=-1, int8_t _busy=-1);
 
+=======
+    PL_microEPD(uint8_t _cs, int _rst=-1, int _busy=-1);
+>>>>>>> origin/master
     void begin(bool erase=true);
     void clear();
     void drawPixel(int16_t x, int16_t y, uint16_t color);
@@ -74,6 +78,7 @@ public:
     void RSVPText(String text);
     void setVBorderColor(int color);
     uint8_t readTemperature(void);
+<<<<<<< HEAD
     byte getEPDsize(void);
     void deepSleep(void);
     int width, height;
@@ -83,16 +88,25 @@ private:
     byte buffer[EPD_WIDTH * EPD_HEIGHT / 4];
     byte buffer2[EPD_WIDTH * EPD_HEIGHT / 4];
     int _EPDsize, _buffersize;
+=======
+
+
+private:
+>>>>>>> origin/master
     int cs, rst, busy;
     int cursorX, cursorY;
     int fontHeight=8, fontWidth=5;
     int nextline=EPD_WIDTH/4;
     void waitForBusyInactive(int duration);
+<<<<<<< HEAD
     void writeRegister(uint8_t address, int16_t val1, int16_t val2, int16_t val3, int16_t val4);
     byte readRegister(char address);
     int getPixel(int x, int y);
     void drawPixel2(int x, int y, int color);
     void scrambleBuffer(void);
+=======
+    void writeRegister(char address, char val1, signed short val2, signed short val3, signed short val4);
+>>>>>>> origin/master
     void writeBuffer(void);
     void WhiteErase(void);
     void powerOn(void);

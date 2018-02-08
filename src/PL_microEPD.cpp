@@ -382,6 +382,7 @@ void PL_microEPD::writeBuffer(){
 // ************************************************************************************
 // WRITE REGISTER - Sets register ADDRESS to value VAL1 (optional: VAL2, VAL3, VAL4)
 // ************************************************************************************
+<<<<<<< HEAD
 void PL_microEPD::writeRegister(uint8_t address, int16_t val1, int16_t val2, 
     int16_t val3, int16_t val4) {
     digitalWrite(cs, LOW);
@@ -390,6 +391,15 @@ void PL_microEPD::writeRegister(uint8_t address, int16_t val1, int16_t val2,
     if (val2!=-1) SPI.transfer((byte)val2);
     if (val3!=-1) SPI.transfer((byte)val3);
     if (val4!=-1) SPI.transfer((byte)val4);
+=======
+void PL_microEPD::writeRegister(char address, char val1, signed short val2, signed short val3, signed short val4) {
+    digitalWrite(cs, LOW);
+    SPI.transfer(address);
+    SPI.transfer(val1);
+    if (val2>-1) SPI.transfer(val2 & 0xFF);
+    if (val3>-1) SPI.transfer(val3 & 0xFF);
+    if (val4>-1) SPI.transfer(val4 & 0xFF);
+>>>>>>> origin/master
     digitalWrite(cs, HIGH);
     waitForBusyInactive(EPD_TMG_SR2);
 }
