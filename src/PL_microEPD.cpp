@@ -1,19 +1,19 @@
 /* *****************************************************************************************
-PL_MICROEPD.CPP - A Hardware Library for 1.1” E-Paper display (EPD) from Plastic Logic based
-on UC8156 IC. This display uses six GPIOs to communicate (4-wire SPI, reset pin, busy pin).
+PL_MICROEPD - A Universal Hardware Library for 1.1”, 1.4", 2.1" and 3.1" E-Paper displays 
+(EPDs) from Plastic Logic based on UC8156 driver IC. The communication is SPI-based, for more
+information about hook-up and tutorials please check: https://github.com/RobPo/Paperino.
 
-Created by Robert Poser, Oct 5th 2017, Dresden/Germany. Released under BSD license
+Created by Robert Poser, Feb 9th 2018, Dresden/Germany. Released under BSD license
 (3-clause BSD license), check license.md for more information.
 
 We invested time and resources providing this open source code, please support Paperino and
-open source hardware by purchasing this product @Crowdsupply @Watterott @Plasticlogic
+open source hardware by purchasing this product @Crowd_supply @Watterott @Plasticlogic
 ***************************************************************************************** */
 #include "PL_microEPD.h"
 
-byte buffer[EPD_BUFFER_SIZE];
-
-PL_microEPD::PL_microEPD(uint8_t _cs, int _rst, int _busy) : Adafruit_GFX(EPD_WIDTH,
+PL_microEPD::PL_microEPD(int8_t _cs, int8_t _rst, int8_t _busy) : Adafruit_GFX(EPD_WIDTH, 
 EPD_HEIGHT) {
+
     cs      = _cs;
     rst     = _rst;
     busy    = _busy;
@@ -26,33 +26,58 @@ EPD_HEIGHT) {
 // By default (WHITEERASE=TRUE) a clear screen update is triggered once to erase the screen.
 // ******************************************************************************************
 void PL_microEPD::begin(bool whiteErase) {
-    pinMode(cs, OUTPUT);
+    pinMode(cs, OUTPUT);  
     if (busy!=-1)
         pinMode(busy, INPUT);
 
     if (rst!=-1) {
-        pinMode(rst, OUTPUT);
-        delay(1);
-        digitalWrite(rst, HIGH);        //Triggering a global hardware reset
-        waitForBusyInactive(EPD_TMG_SRT);     //All registers are set to default
+        pinMode(rst, OUTPUT);                   //Trigger a global hardware reset...
+        digitalWrite(rst, HIGH);     
         digitalWrite(rst, LOW);
-        delay(1);
         digitalWrite(rst, HIGH);
         waitForBusyInactive(EPD_TMG_SRT);
+        writeRegister(EPD_SOFTWARERESET, -1, -1, -1, -1);    //... or do software reset if no pin defined
     } else
-        writeRegister(0x20, -1, -1, -1, -1);    //If no reset pin defined, do software reset
+        writeRegister(EPD_SOFTWARERESET, -1, -1, -1, -1);    //... or do software reset if no pin defined
 
-    writeRegister(EPD_PANELSETTING, 0x12, -1, -1, -1);
+    _EPDsize=getEPDsize();                                  //Read NVM to determine display size
+    switch (_EPDsize) {
+        case 11:
+            _width=72; _height=148; nextline= _width/4; _buffersize=_width*_height/4;
+            width=148; height=72;
+            writeRegister(EPD_PANELSETTING, 0x12, -1, -1, -1);      	
+            writeRegister(EPD_WRITEPXRECTSET, 0, 71, 0, 147);
+            writeRegister(EPD_VCOMCONFIG, 0x00, 0x00, 0x24, 0x07);
+            break;
+        case 14:
+            _width=100; _height=180; nextline= _width/4; _buffersize=_width*_height/4;
+            width=180; height=100;
+            writeRegister(EPD_PANELSETTING, 0x12, -1, -1, -1);      	
+            writeRegister(EPD_WRITEPXRECTSET, 0, 0xB3, 0x3C, 0x9F);
+            writeRegister(EPD_VCOMCONFIG, 0x00, 0x00, 0x24, 0x07);
+            break;
+        case 21:
+            _width=146; _height=240; nextline= _width/4; _buffersize=_width*_height/4;
+            width=240; height=146;
+            writeRegister(EPD_PANELSETTING, 0x10, -1, -1, -1);      	
+            writeRegister(EPD_WRITEPXRECTSET, 0, 239, 0, 145);	//147?
+            writeRegister(EPD_VCOMCONFIG, 0x00, 0x00, 0x24, 0x07);
+            break;
+        case 31:
+            _width=76; _height=312; nextline= _width/4; _buffersize=_width*_height/4;
+            width=312; height=76;
+            writeRegister(EPD_PANELSETTING, 0x12, -1, -1, -1);      	
+            writeRegister(EPD_WRITEPXRECTSET, 0, 0x97, 0, 0x9b);	
+            writeRegister(EPD_VCOMCONFIG, 0x50, 0x01, 0x24, 0x07);
+    }
     writeRegister(EPD_DRIVERVOLTAGE, 0x25, 0xff, -1, -1);
-    writeRegister(EPD_WRITEPXRECTSET, 0, 71, 0, 147);
-    writeRegister(EPD_VCOMCONFIG, 0x00, 0x00, 0x24, 0x07);
     writeRegister(EPD_BORDERSETTING, 0x04, -1, -1, -1);
     writeRegister(EPD_LOADMONOWF, 0x60, -1, -1, -1);
     writeRegister(EPD_INTTEMPERATURE, 0x0A, -1, -1, -1);
 
-    if (whiteErase) WhiteErase();     //Start with a white refresh if TRUE
-    setTextColor(EPD_BLACK);        //Set text color to black as default
-    setRotation(1);                 //Set landscape mode as default
+    setRotation(1);                             //Set landscape mode as default
+    if (whiteErase) WhiteErase();               //Start with a white refresh if TRUE
+    setTextColor(EPD_BLACK);                    //Set text color to black as default
 }
 
 // ************************************************************************************
@@ -60,8 +85,10 @@ void PL_microEPD::begin(bool whiteErase) {
 // back to the origin coordinates (0,0).
 // ************************************************************************************
 void PL_microEPD::clear() {
-    for (int i=0; i<EPD_BUFFER_SIZE; i++)
+    for (int i=0; i<_buffersize; i++) {
         buffer[i] = 0xff;
+        buffer2[i] = 0xff;
+    }
     setCursor(0,0);
 }
 
@@ -70,29 +97,50 @@ void PL_microEPD::clear() {
 // parameter color (2 bit value).
 // ************************************************************************************
 void PL_microEPD::drawPixel(int16_t x, int16_t y, uint16_t color) {
-    if ((x < 0) || (x >= _width || (y < 0) || (y >= _height))) return;
 
-    y=y+3;
-    if (color < 4) {
-      uint16_t byteIndex = x/4 + (y) * nextline;
-      uint8_t pixels = buffer[byteIndex];
+    if ((x < 0) || (x >= _width) || (y < 0) || (y >= _height) || (color>4 )) return;  
 
-      switch (x%4) {          //2-bit grayscale dot
-        case 0: pixels = (pixels & 0x3F) | ((uint8_t)color << 6); break;
-        case 1: pixels = (pixels & 0xCF) | ((uint8_t)color << 4); break;
-        case 2: pixels = (pixels & 0xF3) | ((uint8_t)color << 2); break;
-        case 3: pixels = (pixels & 0xFC) | (uint8_t)color; break;
-  }
-  buffer[byteIndex] = pixels;
-    }
+    if (_EPDsize==11 || _EPDsize==3) 
+        y=y+3;
+    uint8_t pixels = buffer[x/4 + (y) * nextline];
+	switch (x%4) {					            //2-bit grayscale dot
+    	case 0: buffer[x/4 + (y) * nextline] = (pixels & 0x3F) | ((uint8_t)color << 6); break;	
+    	case 1: buffer[x/4 + (y) * nextline] = (pixels & 0xCF) | ((uint8_t)color << 4); break;	
+    	case 2: buffer[x/4 + (y) * nextline] = (pixels & 0xF3) | ((uint8_t)color << 2); break;	
+    	case 3: buffer[x/4 + (y) * nextline] = (pixels & 0xFC) | (uint8_t)color; break;		
+	}
 }
 
+void PL_microEPD::drawPixel2(int x, int y, int color) {
+   if ((x < 0) || (x >= _width) || (y < 0) || (y >= _height) || (color>4 )) return;  
+    
+    uint8_t pixels = buffer2[x/4 + (y) * nextline];
+	switch (x%4) {					            //2-bit grayscale dot
+    	case 0: buffer2[x/4 + (y) * nextline] = (pixels & 0x3F) | ((uint8_t)color << 6); break;	
+    	case 1: buffer2[x/4 + (y) * nextline] = (pixels & 0xCF) | ((uint8_t)color << 4); break;	
+    	case 2: buffer2[x/4 + (y) * nextline] = (pixels & 0xF3) | ((uint8_t)color << 2); break;	
+    	case 3: buffer2[x/4 + (y) * nextline] = (pixels & 0xFC) | (uint8_t)color; break;		
+	}
+}
+
+int PL_microEPD::getPixel(int x, int y) {
+    if ((x < 0) || (x >= _width) || (y < 0) || (y >= _height)) return 5;  
+
+	uint16_t byteIndex = x/4 + (y) * nextline;
+    switch (x%4) {				
+    		case 0: return ((unsigned int)(buffer[byteIndex] & 0xC0) >> 6); 
+     		case 1: return ((unsigned int)(buffer[byteIndex] & 0x30) >> 4);
+    		case 2: return ((unsigned int)(buffer[byteIndex] & 0x0C) >> 2);
+    		case 3: return ((unsigned int)(buffer[byteIndex] & 0x03)); 
+	}
+}
 
 // ************************************************************************************
 // INVERT - Inverts the screen content from black to white and vice versa
 // ************************************************************************************
 void PL_microEPD::invert() {
-    for (int i=0; i<EPD_BUFFER_SIZE; i++) buffer[i] = ~buffer[i];
+    for (int i=0; i<_buffersize; i++) 
+        buffer[i] = ~buffer[i];
 }
 
 // ************************************************************************************
@@ -112,10 +160,10 @@ void PL_microEPD::invert() {
 // NOT FASTER THAN MINUTELY (OR RUN BACK2BACK UPDATES NOT LONGER AS ONE HOUR PER DAY.)
 // ************************************************************************************
 void PL_microEPD::update(int updateMode) {
+    scrambleBuffer();
     writeBuffer();
     powerOn();
-    switch (updateMode)
-    {
+    switch (updateMode) {
         case 0:
             writeRegister(EPD_PROGRAMMTP, 0x00, -1, -1, -1);
             writeRegister(EPD_DISPLAYENGINE, 0x03, -1, -1, -1);
@@ -130,12 +178,35 @@ void PL_microEPD::update(int updateMode) {
             writeRegister(EPD_PROGRAMMTP, 0x02, -1, -1, -1);
             writeRegister(EPD_DISPLAYENGINE, 0x07, -1, -1, -1);
             waitForBusyInactive(EPD_TMG_MID);
-            break;
     }
     powerOff();
 }
 
-
+// ************************************************************************************
+// SCRAMBLEBUFFER - 
+// ************************************************************************************
+void PL_microEPD::scrambleBuffer() {
+    switch (_EPDsize) {
+        case 21:
+            for (int y=0; y<146; y++) {                   // for each gateline...
+                for (int x=0; x<240/2; x++) {             // for each sourceline...
+                    drawPixel(239-x, y, getPixel(x,y+1));
+                    drawPixel(x, y, getPixel(x+120,y+1));
+                }
+            }
+            break;
+        case 31:
+            for (int y=0; y<_height; y++) {               // for each gateline...
+                //scrambleline=
+                for (int x=0; x<_width; x++) {            // for each sourceline...
+                    if (x%2)                                    // if x = 1, 3, 5..
+                        drawPixel2((x-1)/2, y+1, getPixel(x,y));
+                    else
+                        drawPixel2(_width/2+x/2, y, getPixel(x,y));
+                }
+            }
+    }
+}
 
 // ************************************************************************************
 // SETROTATION - Let’s you define the display orientation. If set to “1” the landscape
@@ -144,16 +215,30 @@ void PL_microEPD::update(int updateMode) {
 void PL_microEPD::setRotation(uint8_t o) {
     clear();
     if (o==1) {
-        nextline = EPD_HEIGHT/4;      //Landscape mode (default)
-        writeRegister(EPD_DATENTRYMODE, 0x07, -1, -1, -1);
-        _width  = HEIGHT;
-        _height = WIDTH;
+        nextline = _height/4;      				//Landscape mode (default)
+        switch (_EPDsize) {
+            case 11:
+                writeRegister(EPD_DATENTRYMODE, 0x07, -1, -1, -1); 
+                break;
+            case 14:
+                writeRegister(EPD_DATENTRYMODE, 0x02, -1, -1, -1); 
+                break;
+            case 21:
+                writeRegister(EPD_DATENTRYMODE, 0x20, -1, -1, -1);  
+                break;
+            case 31:
+                writeRegister(EPD_DATENTRYMODE, 0x07, -1, -1, -1);  
+        }
+        
+        _width  = _width + _height;
+        _height = _width - _height;
+        _width  = _width - _height;
     }
     if (o==2) {
-        nextline = EPD_WIDTH/4;     //Portrait mode
+        nextline = _width/4;     //Portrait mode
         writeRegister(EPD_DATENTRYMODE, 0x02, -1, -1, -1);
-        _width  = WIDTH;
-        _height = HEIGHT;
+        _width  = _width;
+        _height = _height;
   }
 }
 
@@ -166,7 +251,7 @@ void PL_microEPD::scrollText(String text, int cutout) {
     int temp_y = cursor_y;
     setTextWrap(false);
 
-    for (int offset = 0; offset < text.length(); offset++) {
+    for (unsigned int offset = 0; offset < text.length(); offset++) {
         String t = "";
         for (int i = 0; i < cutout; i++)
             t += text.charAt((offset + i));
@@ -174,7 +259,7 @@ void PL_microEPD::scrollText(String text, int cutout) {
         print(t);
         update(EPD_UPD_MONO);
         clear();
-        #ifdef defined(PLATFORM_ID)    // If Particle used, keep cloud connection alive
+        #if defined(PLATFORM_ID)    // If Particle used, keep cloud connection alive
             Particle.process();
         #endif
     }
@@ -232,11 +317,24 @@ uint8_t PL_microEPD::readTemperature() {
 // ************************************************************************************
 void PL_microEPD::powerOn() {
     waitForBusyInactive(EPD_TMG_SRT);
-    writeRegister(EPD_SETRESOLUTION, 0, 239, 0, 147);
+    switch (_EPDsize) {
+        case 11:
+            writeRegister(EPD_SETRESOLUTION, 0, 239, 0, 147);
+            break;
+        case 14:
+            writeRegister(EPD_SETRESOLUTION, 0, 0xEF, 0, 0x9F);
+            break;
+        case 21:
+            writeRegister(EPD_SETRESOLUTION, 0, 239, 0, 159);
+            break;
+        case 31:
+            writeRegister(EPD_SETRESOLUTION, 0, 239, 0, 159);
+    }
     writeRegister(EPD_TCOMTIMING, 0x67, 0x55, -1, -1);
     writeRegister(EPD_POWERSEQUENCE, 0x00, 0x00, 0x00, -1);
     writeRegister(EPD_POWERCONTROL, 0xD1, -1, -1, -1);
     waitForBusyInactive(EPD_TMG_SR2);
+    delay(10);                              // This value can still be optimized!
 }
 
 // ************************************************************************************
@@ -255,10 +353,27 @@ void PL_microEPD::powerOff() {
 // WRITEBUFFER - Sends the content of the memory buffer to the UC8156 driver IC.
 // ************************************************************************************
 void PL_microEPD::writeBuffer(){
-    writeRegister(EPD_PIXELACESSPOS, 0, 147, -1, -1);
+    switch (_EPDsize) {
+        case 11:
+            writeRegister(EPD_PIXELACESSPOS, 0, 147, -1, -1);		    
+            break;
+        case 14:
+            writeRegister(EPD_PIXELACESSPOS, 0, 0x9f, -1, -1);		    
+            break;
+        case 21:
+            writeRegister(EPD_PIXELACESSPOS, 0, 0, -1, -1);	
+            break;
+        case 31:
+            writeRegister(EPD_PIXELACESSPOS, 0, 0x9b, -1, -1);	
+    }    
     digitalWrite(cs, LOW);
     SPI.transfer(0x10);
-    for (int i=0; i < EPD_BUFFER_SIZE; i++) SPI.transfer(buffer[i]);
+    if (_EPDsize==31)
+        for (int i=0; i < _buffersize; i++) 
+            SPI.transfer(buffer2[i]);
+    else
+        for (int i=0; i < _buffersize; i++) 
+            SPI.transfer(buffer[i]);
     digitalWrite(cs, HIGH);
     waitForBusyInactive(EPD_TMG_SRT);
 }
@@ -267,16 +382,60 @@ void PL_microEPD::writeBuffer(){
 // ************************************************************************************
 // WRITE REGISTER - Sets register ADDRESS to value VAL1 (optional: VAL2, VAL3, VAL4)
 // ************************************************************************************
-void PL_microEPD::writeRegister(char address, char val1, char val2, char val3, char val4) {
+void PL_microEPD::writeRegister(uint8_t address, int16_t val1, int16_t val2, 
+    int16_t val3, int16_t val4) {
     digitalWrite(cs, LOW);
     SPI.transfer(address);
-    SPI.transfer(val1);
-    if (val2>-1) SPI.transfer(val2);
-    if (val3>-1) SPI.transfer(val3);
-    if (val4>-1) SPI.transfer(val4);
+    if (val1!=-1) SPI.transfer((byte)val1);
+    if (val2!=-1) SPI.transfer((byte)val2);
+    if (val3!=-1) SPI.transfer((byte)val3);
+    if (val4!=-1) SPI.transfer((byte)val4);
     digitalWrite(cs, HIGH);
     waitForBusyInactive(EPD_TMG_SR2);
 }
+
+// ************************************************************************************
+// READREGISTER - Returning the value of the register at the specified address
+// ************************************************************************************
+byte PL_microEPD::readRegister(char address){
+    byte data;
+    digitalWrite(cs, LOW);                                      
+    SPI.transfer(address | EPD_REGREAD);
+    data = SPI.transfer(0xFF);                         
+    digitalWrite(cs, HIGH);
+    waitForBusyInactive(EPD_TMG_SRT);
+    return data;                                        // can be improved
+}
+
+// ************************************************************************************
+// GETEPDSIZE - Returns the size of the attached display diagonal, e.g. 11 is 
+// equivalent to to a 1.1" EPD, 21 correpsonds to 2.1" and 31 is equal to 3.1" EPD size
+// ************************************************************************************
+byte PL_microEPD::getEPDsize(){
+    byte data;
+    writeRegister(EPD_PROGRAMMTP, 0x02, -1, -1, -1);    // Set MTP2 as active
+    writeRegister(EPD_MTPADDRESSSETTING, 0xF2, 0x04, -1, -1); 
+                                                        // Set MTP address to 0x04F0h
+    data = readRegister(0x43);                          // Read one dummy byte
+    data = readRegister(0x43);                          // Read one byte
+
+    if (data==49) {
+        data = readRegister(0x43);                      
+        if (data==49)                                   // 1.1" detected
+            return 11;
+        else 
+            return 14;                                  // 1.4" detected
+    } 
+       
+    if (data==50)                                       // 2.1" detected
+        return 21;
+        
+    if (data==51)                                       // 3.1" detected
+        return 31;
+        
+    return 99;
+}
+
 
 // ************************************************************************************
 // WHITE ERASE - Triggers two white updates to erase the screen and set back previous
@@ -297,12 +456,23 @@ void PL_microEPD::WhiteErase() {
 // Function returns only after driver IC is free again for listening to new commands.
 // ************************************************************************************
 void PL_microEPD::waitForBusyInactive(int duration){
-    if (busy!=-1)
-        while (digitalRead(busy) == LOW) {}
-    else
+    if (busy==-1) 
         delay(duration);
+    else 
+        while (digitalRead(busy) == LOW) {}
 }
 
+// ************************************************************************************
+// DEEPSLEEP - Putting the UC8156 in deep sleep mode with less than 1µA current @3.3V.
+// Reset pin toggling needed to wakeup the driver IC again.
+// ************************************************************************************
+void PL_microEPD::deepSleep(void) {
+    writeRegister(0x21, 0xff, 0xff, 0xff, 0xff); 
+}
+
+// ************************************************************************************
+// BOSCH BMA250E **********************************************************************
+// ************************************************************************************
 
 BO_BMA250::BO_BMA250(uint8_t _cs2) {
     cs2     = _cs2;             //BMA250 accelerometer
@@ -375,5 +545,13 @@ void BO_BMA250::readAccel() {
     z |= SPI.transfer(0xFF) << 8;
     z >>= 6;
     temp = SPI.transfer(0xFF);
+    digitalWrite(cs2, HIGH);
+}
+
+void BO_BMA250::deepSuspend() {
+    digitalWrite(cs2, LOW);
+    //SPI.transfer(0x11|0x80); 
+    SPI.transfer(0x11); 
+    SPI.transfer(0x20); 
     digitalWrite(cs2, HIGH);
 }
