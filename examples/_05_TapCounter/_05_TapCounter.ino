@@ -12,9 +12,12 @@ SYSTEM_MODE(SEMI_AUTOMATIC);
 #include "Adafruit_GFX.h"
 #include "PL_microEPD.h"
 
+#define EPD_RST     A0
+#define EPD_BUSY    A1
 #define EPD_CS      A2
 #define ACC_CS      D6
-PL_microEPD display(EPD_CS);  
+
+PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);  
 BO_BMA250   accel(ACC_CS);
 int         i       = 0;
 

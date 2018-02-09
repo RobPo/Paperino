@@ -10,8 +10,11 @@
 #include "Adafruit_GFX.h"
 #include "PL_microEPD.h"
 
+#define EPD_RST     A0
+#define EPD_BUSY    A1
 #define EPD_CS      A2
-PL_microEPD display(EPD_CS);   
+
+PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);  
 
 void setup() {  
     SPI.begin();                    // Bus initialisation, UC8156 supp. max 10Mhz (writing)

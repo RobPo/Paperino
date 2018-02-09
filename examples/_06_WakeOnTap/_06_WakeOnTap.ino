@@ -12,13 +12,15 @@
 SYSTEM_MODE(SEMI_AUTOMATIC);
 STARTUP(System.enableFeature(FEATURE_RETAINED_MEMORY));
 
+#define EPD_RST     A0
+#define EPD_BUSY    A1
 #define EPD_CS      A2
 #define ACC_CS      D6
 
 #include "Adafruit_GFX.h"
 #include "PL_microEPD.h"
  
-PL_microEPD display(EPD_CS);  
+PL_microEPD display(EPD_CS, EPD_RST, EPD_BUSY);  
 BO_BMA250   accel(ACC_CS);
 retained    int i = 0;
 
