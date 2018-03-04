@@ -99,7 +99,7 @@ License Information
 
 This library is _**open source**_!
 
-Created by Robert Poser, Oct 5th 2017, Dresden/Germany. Released under BSD license (3-clause BSD license), check license.md for more information.
+Created by Robert Poser, Mar 4th 2018, Dresden/Germany. Released under BSD license (3-clause BSD license), check license.md for more information.
 
 We invested time and resources providing this open source code, please support Paperino and 
 open source hardware @Adafruit and by purchasing this product @Crowdsupply @Watterott @Plasticlogic.
