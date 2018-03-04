@@ -88,6 +88,7 @@ These demo projects are for your inspiration! What will you implement with Paper
 
 Changelog
 -------------------
+- [v1.1.01 (03/2018)](https://github.com/RobPo/Paperino/archive/v1.1.01.zip) - Added support for more ePaper display screens from Plastic Logic: 1.4", 2.1" & 3.1" (auto-detection) and added support for deepSleep() to minimize sleep current of driver IC
 - [v1.0.20 (10/2017)](https://github.com/RobPo/Paperino/archive/v1.0.20.zip) - Add support for (optional) simplified wiring for MCUs with limited GPIOs
 - [v1.0.10 (08/2017)](https://github.com/RobPo/Paperino/archive/v1.0.10.zip) -  Particle & Arduino Library Manager supported; tap sensitivity increased; ‘verified’ by Particle
 - [v1.0.00 (07/2017)](https://github.com/RobPo/Paperino/archive/v1.0.06.zip) - Initial release
