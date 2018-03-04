@@ -32,11 +32,13 @@ void PL_microEPD::begin(bool whiteErase) {
 
     if (rst!=-1) {
         pinMode(rst, OUTPUT);                   //Trigger a global hardware reset...
-        digitalWrite(rst, HIGH);     
+        digitalWrite(rst, HIGH);  
+        delay(5);   
         digitalWrite(rst, LOW);
+        delay(5);        
         digitalWrite(rst, HIGH);
+        delay(5);        
         waitForBusyInactive(EPD_TMG_SRT);
-        writeRegister(EPD_SOFTWARERESET, -1, -1, -1, -1);    //... or do software reset if no pin defined
     } else
         writeRegister(EPD_SOFTWARERESET, -1, -1, -1, -1);    //... or do software reset if no pin defined
 
@@ -74,6 +76,7 @@ void PL_microEPD::begin(bool whiteErase) {
     writeRegister(EPD_BORDERSETTING, 0x04, -1, -1, -1);
     writeRegister(EPD_LOADMONOWF, 0x60, -1, -1, -1);
     writeRegister(EPD_INTTEMPERATURE, 0x0A, -1, -1, -1);
+    writeRegister(EPD_BOOSTSETTING, 0x22, 0x17, -1, -1);
 
     setRotation(1);                             //Set landscape mode as default
     if (whiteErase) WhiteErase();               //Start with a white refresh if TRUE
@@ -333,8 +336,7 @@ void PL_microEPD::powerOn() {
     writeRegister(EPD_TCOMTIMING, 0x67, 0x55, -1, -1);
     writeRegister(EPD_POWERSEQUENCE, 0x00, 0x00, 0x00, -1);
     writeRegister(EPD_POWERCONTROL, 0xD1, -1, -1, -1);
-    waitForBusyInactive(EPD_TMG_SR2);
-    delay(10);                              // This value can still be optimized!
+    while (readRegister(0x15) == 0) {}          // Wait until Internal Pump is ready 
 }
 
 // ************************************************************************************
