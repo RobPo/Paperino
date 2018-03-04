@@ -74,7 +74,7 @@ Once this example is successfully running, please have a look at the following s
 
 Distributors
 -------------------
-Paperino ePaper displays are available at [Crowd Supply](https://www.crowdsupply.com/robert-poser/paperino) and at [Watterott electronic](http://www.watterott.com/de/Paperino-A-micro-ePaper-with-accelerometer).
+Paperino ePaper displays are available at [Crowd Supply](https://www.crowdsupply.com/robert-poser/paperino), [Watterott electronic](http://www.watterott.com/de/Paperino-A-micro-ePaper-with-accelerometer), [Mouser](https://www2.mouser.com/Search/Refine.aspx?Keyword=paperino) and [DigiKey](https://www.digikey.com/products/en?keywords=paperino).
 
 Projects
 -------------------
