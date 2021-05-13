@@ -1,13 +1,13 @@
 # Test EPD functionality
 
-Connect a Particle Photon with a Paperino Epaper on a breadboard as described in the hookup guide (https://robpo.github.io/Paperino/). Open the example _01_HelloWorld.ino and verify the proper functionality by comparing the display behaviour with the video shown on the hookup-guide.
+Connect a Particle Photon with a Paperino Epaper on a breadboard as described in the hookup guide (https://robpo.github.io/Paperino/). Open the example 01_HelloWorld.ino and verify the proper functionality by comparing the display behaviour with the video shown on the hookup-guide.
 
 Repeat for Core, Electron and Bluz.io
 Repeat the same procedure for example number 02, 03 and 04.
 
 # Test Accelerometer functionality
 
-Connect a Particle Photon with a Paperino Epaper on a breadboard as described in the hookup guide (https://robpo.github.io/Paperino/). Open the example _05_TapCounter.ino and verify the proper functionality by comparing the display behaviour with the video shown on the hookup-guide.
+Connect a Particle Photon with a Paperino Epaper on a breadboard as described in the hookup guide (https://robpo.github.io/Paperino/). Open the example 05_TapCounter.ino and verify the proper functionality by comparing the display behaviour with the video shown on the hookup-guide.
 
 Repeat for Core, Electron and Bluz.io
 Repeat the same procedure for example number 06.
